@@ -57,8 +57,9 @@
             <div class="bg-white rounded-[24px] shadow-sm border border-[#eceee8] p-6 md:p-8">
                 
                 <!-- Form -->
-                <form action="#" method="GET" class="space-y-5">
-                    
+                <form action="{{ route('register.store') }}" method="POST" class="space-y-5">
+                    @csrf
+
                     <!-- Nama -->
                     <div>
                         <label for="name" class="block text-[#16352d] font-medium mb-3">
@@ -70,10 +71,14 @@
                                 type="text"
                                 id="name"
                                 name="name"
+                                value="{{ old('name') }}"
                                 placeholder="Masukkan nama lengkap"
                                 class="w-full bg-transparent outline-none text-[#16352d] placeholder:text-[#8ca096]"
                             >
                         </div>
+                        @error('name')
+                            <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Email -->
@@ -87,10 +92,14 @@
                                 type="email"
                                 id="email"
                                 name="email"
+                                value="{{ old('email') }}"
                                 placeholder="nama@email.com"
                                 class="w-full bg-transparent outline-none text-[#16352d] placeholder:text-[#8ca096]"
                             >
                         </div>
+                        @error('email')
+                            <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Password -->
@@ -111,6 +120,9 @@
                                 <i class="fa-regular fa-eye"></i>
                             </button>
                         </div>
+                        @error('password')
+                            <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Konfirmasi Password -->
@@ -152,6 +164,9 @@
                             </a>
                         </label>
                     </div>
+                    @error('terms')
+                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                    @enderror
 
                     <!-- Button -->
                     <button

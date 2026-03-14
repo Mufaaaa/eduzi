@@ -57,8 +57,8 @@
             <div class="bg-white rounded-[24px] shadow-sm border border-[#eceee8] p-6 md:p-8">
                 
                 <!-- Google Button -->
-                <button
-                    type="button"
+                <a
+                    href="{{ route('google.login') }}"
                     class="w-full flex items-center justify-center gap-3 border border-[#d9dfd7] bg-[#f8faf7] rounded-2xl py-4 text-[#18342d] font-semibold hover:bg-[#f3f6f1] transition"
                 >
                     <img 
@@ -67,7 +67,7 @@
                         class="w-5 h-5"
                     >
                     Masuk dengan Google
-                </button>
+                </a>
 
                 <!-- Divider -->
                 <div class="flex items-center gap-4 my-8">
@@ -77,7 +77,8 @@
                 </div>
 
                 <!-- Form -->
-                <form action="#" method="GET" class="space-y-5">
+                <form action="{{ route('login.authenticate') }}" method="POST" class="space-y-5">
+                    @csrf
                     
                     <!-- Email -->
                     <div>
@@ -90,10 +91,14 @@
                                 type="email"
                                 id="email"
                                 name="email"
+                                value="{{ old('email') }}"
                                 placeholder="nama@email.com"
                                 class="w-full bg-transparent outline-none text-[#16352d] placeholder:text-[#8ca096]"
                             >
                         </div>
+                        @error('email')
+                            <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <!-- Password -->
@@ -120,7 +125,18 @@
                                 <i class="fa-regular fa-eye"></i>
                             </button>
                         </div>
+                        @error('password')
+                            <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
+                        @enderror
                     </div>
+
+                    @if (session('error'))
+                        <p class="text-red-500 text-sm">{{ session('error') }}</p>
+                    @endif
+
+                    @if (session('success'))
+                        <p class="text-green-600 text-sm">{{ session('success') }}</p>
+                    @endif
 
                     <!-- Button -->
                     <button
