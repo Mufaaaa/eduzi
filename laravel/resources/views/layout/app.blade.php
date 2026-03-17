@@ -43,8 +43,39 @@
 {{-- Konten utama --}}
 @yield('content')
 
+<details class="chat-toggle fixed bottom-6 right-6 z-50">
+  {{-- Tombol logo (toggle) --}}
+  <summary class="list-none cursor-pointer">
+    <span class="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white shadow-lg hover:scale-105 transition">
+      <img src="{{ asset('images/Logo.png') }}" alt="Chat" class="h-8 w-8">
+    </span>
+  </summary>
+
+  {{-- Panel chat --}}
+  <div
+    class="mt-3 w-[min(420px,90vw)] h-[min(560px,75vh)] rounded-2xl overflow-hidden shadow-2xl
+           bg-white text-slate-900 border border-slate-200">
+      <deep-chat
+        id="deepchat"
+        class="block h-full w-full"
+        style="height:100%;width:100%;"
+        textInput='{"placeholder":{"text":"Tanya apa aja di sini..."}}'
+        introMessage='{"text":"Selamat datang di asisten Eduzi 👋"}'
+        avatars='{
+          "ai": { "src": "{{ asset('images/Logo.png') }}", "shape": "circle", "size": "30px" },
+          "user": { "color": "#facc15", "shape": "circle", "size": "30px" }
+        }'
+        connect='{
+          "url": "/deep-chat",
+          "method": "POST",
+          "headers": { "X-Requested-With": "XMLHttpRequest" }
+
+        }'
+      ></deep-chat>
+    </div>
+  </details>
+
 <!-- JS -->
-<script src="node_modules/flowbite/dist/flowbite.js"></script>
 <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
 
 <script>

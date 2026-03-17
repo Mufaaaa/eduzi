@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\GeminiChatController;
 
 Route::get('/', [IndexController::class, 'index']);
 
@@ -26,3 +27,5 @@ Route::middleware(['auth'])->group(function () {
     
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
+
+Route::post('/deep-chat', [GeminiChatController::class, 'handle'])->withoutMiddleware(['web']);
