@@ -35,6 +35,7 @@ class RegisterController extends Controller
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
+            'role' => 'pengguna',
         ]);
 
         return redirect('/masuk')->with('success', 'Akun berhasil dibuat, silakan masuk.');

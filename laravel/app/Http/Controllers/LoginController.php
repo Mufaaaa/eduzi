@@ -23,8 +23,14 @@ class LoginController extends Controller
             'password.required' => 'Password wajib diisi.',
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('web')->attempt($credentials)) {
             $request->session()->regenerate();
+
+            $user = Auth::guard('web')->user();
+
+            if ($user->role === 'admin') {
+                return redirect('/admin');
+            }
 
             return redirect('/home');
         }
@@ -34,7 +40,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('web')->logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();

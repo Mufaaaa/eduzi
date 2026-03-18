@@ -41,13 +41,24 @@ class GoogleController extends Controller
                     'google_id' => $googleUser->getId(),
                     'avatar'    => $googleUser->getAvatar(),
                     'password'  => bcrypt(Str::random(16)),
+                    'role'      => 'pengguna',
                 ]);
             }
 
-            Auth::login($user, true);
+            // bersihkan sesi lama, termasuk sesi dari Filament
+            Auth::guard('web')->logout();
+            request()->session()->invalidate();
+            request()->session()->regenerateToken();
+
+            // login ulang user google
+            Auth::guard('web')->login($user, true);
             request()->session()->regenerate();
 
-            return redirect()->intended('/home');
+            if ($user->role === 'admin') {
+                return redirect('/admin');
+            }
+
+            return redirect('/home');
         } catch (Exception $e) {
             return redirect('/masuk')->with('error', 'Login dengan Google gagal.');
         }
