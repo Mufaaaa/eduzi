@@ -7,6 +7,7 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GeminiChatController;
+use App\Http\Controllers\ChangePasswordController;
 
 Route::get('/', [IndexController::class, 'index']);
 
@@ -25,6 +26,10 @@ Route::get('/auth/google/callback', [GoogleController::class, 'callback'])->name
 Route::middleware(['auth'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');; 
     
+    Route::get('/ganti-password', [ChangePasswordController::class, 'edit'])
+        ->name('password.edit');
+    Route::post('/ganti-password', [ChangePasswordController::class, 'update'])
+        ->name('password.update');
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 

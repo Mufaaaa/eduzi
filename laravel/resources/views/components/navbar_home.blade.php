@@ -52,6 +52,12 @@
                         Profile Saya
                     </a>
 
+                 <div class="py-2">
+                    <a href="/ganti-password"
+                       class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#49a35a] transition">
+                        Ganti Kata Sandi
+                    </a>    
+
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit"
@@ -116,6 +122,12 @@
                    class="w-full py-3 text-center text-gray-900 border border-gray-300 rounded-full hover:bg-gray-100 transition font-semibold">
                     Profile Saya
                 </a>
+
+            <div class="flex flex-col gap-3">
+                <a href="/ganti-password"
+                   class="w-full py-3 text-center text-gray-900 border border-gray-300 rounded-full hover:bg-gray-100 transition font-semibold">
+                    Ganti Kata Sandi
+                </a>    
 
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf
