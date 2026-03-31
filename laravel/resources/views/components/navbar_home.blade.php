@@ -1,4 +1,13 @@
 <!-- Navbar -->
+@php
+    $user = Auth::user();
+    $avatar = $user->avatar ?? null;
+    $isGoogleAvatar = $avatar ? filter_var($avatar, FILTER_VALIDATE_URL) : false;
+    $avatarSrc = $avatar
+        ? ($isGoogleAvatar ? $avatar : asset('storage/' . $avatar))
+        : null;
+@endphp
+
 <nav class="fixed top-0 left-0 w-full bg-white shadow-md px-6 py-4 flex justify-between items-center z-50 border-b border-gray-200">
     
     <!-- Logo -->
@@ -24,15 +33,15 @@
             <button id="profile-btn" type="button"
                 class="w-12 h-12 rounded-full overflow-hidden border-2 border-black shadow-[-3px_3px_0px_rgba(0,0,0,1)] hover:opacity-90 transition">
                 
-                @if(Auth::user()->avatar)
+                @if($avatarSrc)
                     <img 
-                        src="{{ Auth::user()->avatar }}" 
-                        alt="Avatar {{ Auth::user()->name }}"
+                        src="{{ $avatarSrc }}" 
+                        alt="Avatar {{ $user->name }}"
                         class="w-full h-full object-cover"
                     >
                 @else
                     <div class="w-full h-full bg-[#49a35a] text-white font-bold flex items-center justify-center">
-                        {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                        {{ strtoupper(substr($user->name, 0, 1)) }}
                     </div>
                 @endif
             </button>
@@ -42,8 +51,8 @@
                 class="hidden absolute right-0 mt-3 w-64 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden z-50">
                 
                 <div class="px-4 py-4 border-b border-gray-100">
-                    <p class="font-bold text-[#16352d]">{{ Auth::user()->name }}</p>
-                    <p class="text-sm text-gray-500 break-words">{{ Auth::user()->email }}</p>
+                    <p class="font-bold text-[#16352d]">{{ $user->name }}</p>
+                    <p class="text-sm text-gray-500 break-words">{{ $user->email }}</p>
                 </div>
 
                 <div class="py-2">
@@ -52,7 +61,6 @@
                         Profile Saya
                     </a>
 
-                 <div class="py-2">
                     <a href="/ganti-password"
                        class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#49a35a] transition">
                         Ganti Kata Sandi
@@ -98,22 +106,22 @@
         <div class="w-full px-4 pt-4 border-t border-gray-200">
             <div class="flex items-center gap-3 mb-4">
                 <div class="w-12 h-12 rounded-full overflow-hidden border border-gray-300">
-                    @if(Auth::user()->avatar)
+                    @if($avatarSrc)
                         <img 
-                            src="{{ Auth::user()->avatar }}" 
-                            alt="Avatar {{ Auth::user()->name }}"
+                            src="{{ $avatarSrc }}" 
+                            alt="Avatar {{ $user->name }}"
                             class="w-full h-full object-cover"
                         >
                     @else
                         <div class="w-full h-full bg-[#49a35a] text-white font-bold flex items-center justify-center">
-                            {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
+                            {{ strtoupper(substr($user->name, 0, 1)) }}
                         </div>
                     @endif
                 </div>
 
                 <div>
-                    <p class="font-semibold text-[#16352d]">{{ Auth::user()->name }}</p>
-                    <p class="text-sm text-gray-500 break-words">{{ Auth::user()->email }}</p>
+                    <p class="font-semibold text-[#16352d]">{{ $user->name }}</p>
+                    <p class="text-sm text-gray-500 break-words">{{ $user->email }}</p>
                 </div>
             </div>
 
@@ -123,7 +131,6 @@
                     Profile Saya
                 </a>
 
-            <div class="flex flex-col gap-3">
                 <a href="/ganti-password"
                    class="w-full py-3 text-center text-gray-900 border border-gray-300 rounded-full hover:bg-gray-100 transition font-semibold">
                     Ganti Kata Sandi

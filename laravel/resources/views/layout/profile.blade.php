@@ -9,12 +9,11 @@
     <link rel="icon" type="image/png" href="{{ asset('images/Logo.png') }}">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="min-h-screen bg-[#f4f6ef] text-[#1f2a2a] font-[Poppins]">
-    <div class="flex min-h-screen items-center justify-center px-5 py-10">
+<body class="min-h-screen bg-[#f4f6ef] text-slate-800 font-[Poppins]">
+    <div class="min-h-screen px-5 py-12">
         @yield('content')
     </div>
 
@@ -45,21 +44,6 @@
         </div>
     </details>
 
-    <script>
-        function togglePassword(inputId, button) {
-            const input = document.getElementById(inputId);
-            const icon = button.querySelector('i');
-
-            if (input.type === 'password') {
-                input.type = 'text';
-                icon.classList.remove('fa-eye');
-                icon.classList.add('fa-eye-slash');
-            } else {
-                input.type = 'password';
-                icon.classList.remove('fa-eye-slash');
-                icon.classList.add('fa-eye');
-            }
-        }
-    </script>
+    @stack('scripts')
 </body>
 </html>
