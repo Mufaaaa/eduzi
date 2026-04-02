@@ -54,7 +54,7 @@
             </div>
 
             <!-- Card -->
-            <div class="bg-white rounded-[24px] shadow-sm border border-[#eceee8] p-6 md:p-8">
+            <div class="bg-white rounded-3xl shadow-sm border border-[#eceee8] p-6 md:p-8">
                 
                 <!-- Form -->
                 <form action="{{ route('register.store') }}" method="POST" class="space-y-5">

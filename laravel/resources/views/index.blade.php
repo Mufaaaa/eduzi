@@ -41,11 +41,11 @@
 
             <div class="relative">
                 <div class="bg-[#e9e9cf] rounded-[30px] p-5 shadow-sm">
-                    <div class="rounded-[24px] overflow-hidden">
+                    <div class="rounded-3xl overflow-hidden">
                         <img
                             src="{{ asset('images/hero-image.jpg') }}"
                             alt="Hero Eduzi"
-                            class="w-full h-[520px] object-cover"
+                            class="w-full h-96 object-cover"
                         >
                     </div>
                 </div>              
@@ -219,7 +219,7 @@
     <!-- CTA -->
     <section class="py-12">
         <div class="max-w-7xl mx-auto px-6 lg:px-10">
-            <div class="bg-[#49a35a] rounded-[24px] px-6 md:px-12 py-14 text-center text-white shadow-sm">
+            <div class="bg-[#49a35a] rounded-3xl px-6 md:px-12 py-14 text-center text-white shadow-sm">
                 <h3 class="text-4xl font-bold mb-4">Mulai Pantau Gizi Anak Anda Sekarang</h3>
                 <p class="max-w-2xl mx-auto text-[#e8f6eb] leading-relaxed mb-8">
                     Gunakan kalkulator gizi kami untuk mengetahui status gizi anak berdasarkan standar WHO.

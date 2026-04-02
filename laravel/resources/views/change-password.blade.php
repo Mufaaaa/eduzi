@@ -3,21 +3,21 @@
 @section('title', 'Ganti Password')
 
 @section('content')
-<div class="w-full max-w-[560px]">
+<div class="w-full max-w-xl">
     <div class="mb-6 text-center">
         <img
             src="{{ asset('images/Logo.png') }}"
             alt="Eduzi"
-            class="mx-auto mb-3 h-[60px] max-w-[120px] object-contain"
+            class="mx-auto mb-3 h-16 max-w-32 object-contain"
         >
-        <p class="text-[22px] text-[#6c7a72]">
+        <p class="text-2xl text-[#6c7a72]">
             Perbarui kata sandi akun Anda
         </p>
     </div>
 
-    <div class="rounded-[18px] bg-white p-[30px] shadow-[0_10px_25px_rgba(0,0,0,0.05)]">
-        <h2 class="mb-2 text-[22px] font-semibold text-[#142020]">Ganti Kata Sandi</h2>
-        <p class="mb-6 text-[16px] text-[#75847d]">
+    <div class="rounded-2xl bg-white p-8 shadow-[0_10px_25px_rgba(0,0,0,0.05)]">
+        <h2 class="mb-2 text-2xl font-semibold text-[#142020]">Ganti Kata Sandi</h2>
+        <p class="mb-6 text-base text-[#75847d]">
             Masukkan kata sandi lama dan kata sandi baru Anda
         </p>
 
@@ -41,18 +41,18 @@
                         name="current_password"
                         placeholder="Masukkan kata sandi lama"
                         required
-                        class="h-[54px] w-full rounded-[14px] border border-[#d7dfd8] bg-[#f8faf7] px-4 pr-12 text-base text-[#223030] outline-none transition focus:border-[#86c8a5] focus:bg-white"
+                        class="h-14 w-full rounded-xl border border-[#d7dfd8] bg-[#f8faf7] px-4 pr-12 text-base text-[#223030] outline-none transition focus:border-[#86c8a5] focus:bg-white"
                     >
                     <button
                         type="button"
-                        class="absolute right-[14px] top-1/2 -translate-y-1/2 border-0 bg-transparent text-base text-[#738279]"
+                        class="absolute right-4  top-1/2 -translate-y-1/2 border-0 bg-transparent text-base text-[#738279]"
                         onclick="togglePassword('current_password', this)"
                     >
                         <i class="fa fa-eye"></i>
                     </button>
                 </div>
                 @error('current_password')
-                    <div class="mt-2 text-[13px] text-[#d93025]">{{ $message }}</div>
+                    <div class="mt-2 text-sm text-[#d93025]">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -67,18 +67,18 @@
                         name="new_password"
                         placeholder="Masukkan kata sandi baru"
                         required
-                        class="h-[54px] w-full rounded-[14px] border border-[#d7dfd8] bg-[#f8faf7] px-4 pr-12 text-base text-[#223030] outline-none transition focus:border-[#86c8a5] focus:bg-white"
+                        class="h-14 w-full rounded-xl border border-[#d7dfd8] bg-[#f8faf7] px-4 pr-12 text-base text-[#223030] outline-none transition focus:border-[#86c8a5] focus:bg-white"
                     >
                     <button
                         type="button"
-                        class="absolute right-[14px] top-1/2 -translate-y-1/2 border-0 bg-transparent text-base text-[#738279]"
+                        class="absolute right-4  top-1/2 -translate-y-1/2 border-0 bg-transparent text-base text-[#738279]"
                         onclick="togglePassword('new_password', this)"
                     >
                         <i class="fa fa-eye"></i>
                     </button>
                 </div>
                 @error('new_password')
-                    <div class="mt-2 text-[13px] text-[#d93025]">{{ $message }}</div>
+                    <div class="mt-2 text-sm text-[#d93025]">{{ $message }}</div>
                 @enderror
             </div>
 
@@ -93,11 +93,11 @@
                         name="new_password_confirmation"
                         placeholder="Ulangi kata sandi baru"
                         required
-                        class="h-[54px] w-full rounded-[14px] border border-[#d7dfd8] bg-[#f8faf7] px-4 pr-12 text-base text-[#223030] outline-none transition focus:border-[#86c8a5] focus:bg-white"
+                        class="h-14 w-full rounded-xl border border-[#d7dfd8] bg-[#f8faf7] px-4 pr-12 text-base text-[#223030] outline-none transition focus:border-[#86c8a5] focus:bg-white"
                     >
                     <button
                         type="button"
-                        class="absolute right-[14px] top-1/2 -translate-y-1/2 border-0 bg-transparent text-base text-[#738279]"
+                        class="absolute right-4  top-1/2 -translate-y-1/2 border-0 bg-transparent text-base text-[#738279]"
                         onclick="togglePassword('new_password_confirmation', this)"
                     >
                         <i class="fa fa-eye"></i>
@@ -107,7 +107,7 @@
 
             <button
                 type="submit"
-                class="mt-2 h-[56px] w-full rounded-full bg-[#9ed1b1] text-[18px] font-bold text-white transition hover:bg-[#88c59d]"
+                class="mt-2 h-14 w-full rounded-full bg-[#9ed1b1] text-[18px] font-bold text-white transition hover:bg-[#88c59d]"
             >
                 Perbarui Kata Sandi
             </button>

@@ -23,7 +23,7 @@
         <a href="/daftar"
            class="py-2 px-6 text-gray-900 font-semibold border border-black rounded-xl 
                   shadow-[-4px_4px_0px_rgba(0,0,0,1)] 
-                  hover:translate-x-[-2px] hover:translate-y-[2px] 
+                  hover:-translate-x-0.5 hover:translate-y-0.5 
                   hover:shadow-[-2px_2px_0px_rgba(0,0,0,1)] 
                   hover:bg-gray-100 transition duration-200 ease-in-out">
             Daftar
@@ -32,7 +32,7 @@
         <a href="/masuk"
            class="py-2 px-6 text-white font-semibold bg-[#49a35a] border border-black rounded-xl 
                   shadow-[-4px_4px_0px_rgba(0,0,0,1)] 
-                  hover:translate-x-[-2px] hover:translate-y-[2px] 
+                  hover:-translate-x-0.5 hover:translate-y-0.5 
                   hover:shadow-[-2px_2px_0px_rgba(0,0,0,1)] 
                   hover:bg-[#3f8d50] transition duration-200 ease-in-out">
             Masuk
@@ -60,7 +60,7 @@
 
 <!-- Menu Mobile -->
 <div id="menu-mobile"
-     class="hidden fixed top-[100px] left-0 w-full bg-white shadow-md md:hidden 
+     class="hidden fixed top-24 left-0 w-full bg-white shadow-md md:hidden 
             transform scale-95 opacity-0 transition-all duration-300 ease-out 
             z-40 border-t border-gray-200">
 

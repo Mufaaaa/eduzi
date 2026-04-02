@@ -52,7 +52,7 @@
                 
                 <div class="px-4 py-4 border-b border-gray-100">
                     <p class="font-bold text-[#16352d]">{{ $user->name }}</p>
-                    <p class="text-sm text-gray-500 break-words">{{ $user->email }}</p>
+                    <p class="text-sm text-gray-500 break-all">{{ $user->email }}</p>
                 </div>
 
                 <div class="py-2">
@@ -70,7 +70,7 @@
                         @csrf
                         <button type="submit"
                             class="w-full text-left px-4 py-3 text-red-500 hover:bg-red-50 transition">
-                            Logout
+                            Keluar
                         </button>
                     </form>
                 </div>
@@ -94,7 +94,7 @@
 
 <!-- Mobile Menu -->
 <div id="menu-mobile"
-     class="hidden fixed top-[100px] left-0 w-full bg-white shadow-md md:hidden transform scale-95 opacity-0 transition-all duration-300 ease-out z-40 border-t border-gray-200">
+     class="hidden fixed top-24 left-0 w-full bg-white shadow-md md:hidden transform scale-95 opacity-0 transition-all duration-300 ease-out z-40 border-t border-gray-200">
 
     <ul class="flex flex-col items-center gap-4 py-6 text-gray-700 font-medium">
         <li><a href="/home" class="hover:text-[#49a35a] transition-colors">Beranda</a></li>
@@ -121,7 +121,7 @@
 
                 <div>
                     <p class="font-semibold text-[#16352d]">{{ $user->name }}</p>
-                    <p class="text-sm text-gray-500 break-words">{{ $user->email }}</p>
+                    <p class="text-sm text-gray-500 break-all">{{ $user->email }}</p>
                 </div>
             </div>
 
