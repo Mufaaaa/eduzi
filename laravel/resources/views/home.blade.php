@@ -26,8 +26,8 @@
 
                 <!-- Deskripsi -->
                 <p class="mt-6 text-[#708277] text-lg leading-relaxed max-w-xl">
-                    Senang bertemu Anda lagi. Yuk, pantau perkembangan gizi si kecil 
-                    dan temukan artikel terbaru hari ini untuk mendukung tumbuh 
+                    Senang bertemu Anda lagi. Yuk, pantau perkembangan gizi si kecil
+                    dan temukan artikel terbaru hari ini untuk mendukung tumbuh
                     kembang anak yang sehat.
                 </p>
 
@@ -54,7 +54,7 @@
                             class="w-full h-96 object-cover"
                         >
                     </div>
-                </div>              
+                </div>
             </div>
 
         </div>
@@ -71,7 +71,8 @@
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-white border border-[#e5ebe2] rounded-2xl p-7 shadow-sm hover:shadow-md transition">
+                <!-- Artikel Edukasi -->
+                <div class="bg-white border border-[#e5ebe2] rounded-2xl p-7 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300">
                     <div class="w-12 h-12 rounded-xl bg-[#49a35a] text-white flex items-center justify-center text-lg mb-5">
                         <i class="far fa-newspaper"></i>
                     </div>
@@ -79,10 +80,20 @@
                     <p class="text-[#7a8b80] leading-relaxed mb-5">
                         Artikel dan video tentang gizi anak yang ditulis oleh ahli gizi berpengalaman.
                     </p>
-                    <a href="#" class="text-[#49a35a] font-semibold text-sm">Pelajari lebih lanjut →</a>
+                    <button
+                        type="button"
+                        onclick="openModal(
+                            'Artikel Edukasi',
+                            'Fitur ini menyediakan artikel dan video edukatif seputar gizi anak, stunting, MPASI, ASI, dan pola makan sehat yang mudah dipahami oleh orang tua.'
+                        )"
+                        class="text-[#49a35a] font-semibold text-sm hover:underline"
+                    >
+                        Pelajari lebih lanjut →
+                    </button>
                 </div>
 
-                <div class="bg-white border border-[#e5ebe2] rounded-2xl p-7 shadow-sm hover:shadow-md transition">
+                <!-- Kalkulator Gizi -->
+                <div class="bg-white border border-[#e5ebe2] rounded-2xl p-7 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300">
                     <div class="w-12 h-12 rounded-xl bg-[#49a35a] text-white flex items-center justify-center text-lg mb-5">
                         <i class="fas fa-calculator"></i>
                     </div>
@@ -90,10 +101,20 @@
                     <p class="text-[#7a8b80] leading-relaxed mb-5">
                         Pantau status gizi anak dengan kalkulator berbasis standar WHO.
                     </p>
-                    <a href="#" class="text-[#49a35a] font-semibold text-sm">Pelajari lebih lanjut →</a>
+                    <button
+                        type="button"
+                        onclick="openModal(
+                            'Kalkulator Gizi',
+                            'Fitur ini membantu Anda memantau status gizi anak berdasarkan standar WHO. Anda dapat mengecek hasil pengukuran untuk mengetahui apakah pertumbuhan anak sudah sesuai.'
+                        )"
+                        class="text-[#49a35a] font-semibold text-sm hover:underline"
+                    >
+                        Pelajari lebih lanjut →
+                    </button>
                 </div>
 
-                <div class="bg-white border border-[#e5ebe2] rounded-2xl p-7 shadow-sm hover:shadow-md transition">
+                <!-- Forum Komunitas -->
+                <div class="bg-white border border-[#e5ebe2] rounded-2xl p-7 shadow-sm hover:shadow-xl hover:-translate-y-1 transition duration-300">
                     <div class="w-12 h-12 rounded-xl bg-[#49a35a] text-white flex items-center justify-center text-lg mb-5">
                         <i class="fas fa-users"></i>
                     </div>
@@ -101,7 +122,16 @@
                     <p class="text-[#7a8b80] leading-relaxed mb-5">
                         Diskusi dan berbagi pengalaman dengan sesama orang tua dan ahli gizi.
                     </p>
-                    <a href="#" class="text-[#49a35a] font-semibold text-sm">Pelajari lebih lanjut →</a>
+                    <button
+                        type="button"
+                        onclick="openModal(
+                            'Forum Komunitas',
+                            'Forum komunitas memungkinkan orang tua berdiskusi, bertanya, dan berbagi pengalaman seputar tumbuh kembang anak, nutrisi, serta pencegahan stunting.'
+                        )"
+                        class="text-[#49a35a] font-semibold text-sm hover:underline"
+                    >
+                        Pelajari lebih lanjut →
+                    </button>
                 </div>
             </div>
         </div>
@@ -177,10 +207,10 @@
     </section>
 
     <!-- Panduan -->
-    <section class="py-24 bg-[#f6f8f3]">
+    <section 
+        onclick="window.location.href='/panduan'" 
+        class="py-24 bg-[#f6f8f3] hover:bg-[#f1f5ef] transition cursor-pointer">
         <div class="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-10 items-center">
-            
-            <!-- Image -->
             <div class="flex justify-center">
                 <img 
                     src="{{ asset('images/nutrition-guide.png') }}"
@@ -189,7 +219,6 @@
                 >
             </div>
 
-            <!-- Text -->
             <div>
                 <h3 class="text-4xl font-bold text-[#1f3b2f] leading-tight">
                     Panduan Gizi <span class="text-[#49a35a]">Seimbang</span>
@@ -201,23 +230,30 @@
                 </p>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-8">
-                    <div class="bg-white border border-[#e5ebe2] rounded-2xl p-6 text-center shadow-sm">
+                    <div class="bg-white border border-[#e5ebe2] rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition">
                         <div class="text-[#49a35a] text-3xl mb-3">🥬</div>
                         <h4 class="font-semibold text-[#1f3b2f]">Sayuran</h4>
                         <p class="text-sm text-[#7a8b80] mt-1">3–5 porsi/hari</p>
                     </div>
 
-                    <div class="bg-white border border-[#e5ebe2] rounded-2xl p-6 text-center shadow-sm">
+                    <div class="bg-white border border-[#e5ebe2] rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition">
                         <div class="text-[#49a35a] text-3xl mb-3">🍎</div>
                         <h4 class="font-semibold text-[#1f3b2f]">Buah</h4>
                         <p class="text-sm text-[#7a8b80] mt-1">2–3 porsi/hari</p>
                     </div>
 
-                    <div class="bg-white border border-[#e5ebe2] rounded-2xl p-6 text-center shadow-sm">
+                    <div class="bg-white border border-[#e5ebe2] rounded-2xl p-6 text-center shadow-sm hover:shadow-md transition">
                         <div class="text-[#49a35a] text-3xl mb-3">🥚</div>
                         <h4 class="font-semibold text-[#1f3b2f]">Protein</h4>
                         <p class="text-sm text-[#7a8b80] mt-1">2–3 porsi/hari</p>
                     </div>
+                </div>
+
+                <div class="mt-8">
+                    <span class="inline-flex items-center text-[#49a35a] font-semibold">
+                        Lihat panduan lengkap
+                        <span class="ml-2">→</span>
+                    </span>
                 </div>
             </div>
         </div>
@@ -238,8 +274,74 @@
         </div>
     </section>
 
+    <!-- Modal Popup -->
+    <div
+        id="featureModal"
+        class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50 px-4"
+    >
+        <div class="bg-white w-full max-w-lg rounded-3xl shadow-2xl p-8 relative">
+            <button
+                type="button"
+                onclick="closeModal()"
+                class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-3xl leading-none"
+            >
+                &times;
+            </button>
+
+            <div class="w-14 h-14 rounded-2xl bg-[#49a35a] text-white flex items-center justify-center text-2xl mb-5">
+                <i class="fas fa-seedling"></i>
+            </div>
+
+            <h3 id="modalTitle" class="text-3xl font-bold text-[#1f3b2f] mb-4"></h3>
+            <p id="modalContent" class="text-[#708277] leading-relaxed text-base"></p>
+
+            <div class="mt-8">
+                <button
+                    type="button"
+                    onclick="closeModal()"
+                    class="bg-[#49a35a] hover:bg-[#3f8e4e] text-white px-5 py-3 rounded-xl font-semibold transition"
+                >
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer Index -->
     @include('components.footerindex')
 
 </div>
+
+<script>
+    function openModal(title, content) {
+        document.getElementById('modalTitle').innerText = title;
+        document.getElementById('modalContent').innerText = content;
+
+        const modal = document.getElementById('featureModal');
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+
+        document.body.classList.add('overflow-hidden');
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('featureModal');
+        modal.classList.remove('flex');
+        modal.classList.add('hidden');
+
+        document.body.classList.remove('overflow-hidden');
+    }
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+
+    document.getElementById('featureModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeModal();
+        }
+    });
+</script>
 @endsection

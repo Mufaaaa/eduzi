@@ -9,6 +9,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\GeminiChatController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\KalkulatorController;
+use App\Http\Controllers\PanduanController;
 
 Route::get('/', [IndexController::class, 'index']);
 
@@ -37,5 +39,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
+
+Route::get('/kalkulator', [KalkulatorController::class, 'index'])->name('kalkulator');
+
+Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 
 Route::post('/deep-chat', [GeminiChatController::class, 'handle'])->withoutMiddleware(['web']);
