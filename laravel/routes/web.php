@@ -10,7 +10,10 @@ use App\Http\Controllers\GeminiChatController;
 use App\Http\Controllers\ChangePasswordController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\KalkulatorController;
+use App\Http\Controllers\KomunitasController;
 use App\Http\Controllers\PanduanController;
+use App\Http\Controllers\RiwayatController;
+use App\Http\Controllers\ArtikelVideoController;
 
 Route::get('/', [IndexController::class, 'index']);
 
@@ -42,6 +45,12 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/kalkulator', [KalkulatorController::class, 'index'])->name('kalkulator');
 
+Route::get('/komunitas', [KomunitasController::class, 'index'])->name('komunitas');
+
 Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
+
+Route::get('/artikel-video', [ArtikelVideoController::class, 'index'])->name('artikelvideo');
+
+Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat');
 
 Route::post('/deep-chat', [GeminiChatController::class, 'handle'])->withoutMiddleware(['web']);
