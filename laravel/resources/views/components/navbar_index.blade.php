@@ -13,7 +13,7 @@
     <!-- Menu Desktop -->
     <ul class="hidden md:flex space-x-8 text-gray-900 font-medium">
         <li><a href="/" class="hover:text-[#49a35a] transition-colors">Beranda</a></li>
-        <li><a href="/artikel" class="hover:text-[#49a35a] transition-colors">Artikel</a></li>
+        <li><a href="/artikel-video" class="hover:text-[#49a35a] transition-colors">Artikel</a></li>
         <li><a href="/komunitas" class="hover:text-[#49a35a] transition-colors">Komunitas</a></li>
         <li><a href="/kalkulator" class="hover:text-[#49a35a] transition-colors">Kalkulator Gizi</a></li>
     </ul>
@@ -66,7 +66,7 @@
 
     <ul class="flex flex-col items-center gap-4 py-6 text-gray-700 font-medium">
         <li><a href="/" class="hover:text-[#49a35a] transition-colors">Beranda</a></li>
-        <li><a href="/artikel" class="hover:text-[#49a35a] transition-colors">Artikel</a></li>
+        <li><a href="/artike-video" class="hover:text-[#49a35a] transition-colors">Artikel</a></li>
         <li><a href="/komunitas" class="hover:text-[#49a35a] transition-colors">Komunitas</a></li>
         <li><a href="/kalkulator" class="hover:text-[#49a35a] transition-colors">Kalkulator Gizi</a></li>
 

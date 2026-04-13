@@ -50,6 +50,7 @@ Route::get('/komunitas', [KomunitasController::class, 'index'])->name('komunitas
 Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 
 Route::get('/artikel-video', [ArtikelVideoController::class, 'index'])->name('artikelvideo');
+Route::get('/artikel/{id}', [ArtikelVideoController::class, 'show'])->name('artikel.show');
 
 Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat');
 

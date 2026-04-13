@@ -22,7 +22,7 @@
     <!-- Menu Desktop -->
     <ul class="hidden md:flex space-x-8 text-gray-900 font-medium">
         <li><a href="/home" class="hover:text-[#49a35a] transition-colors">Beranda</a></li>
-        <li><a href="/artikel" class="hover:text-[#49a35a] transition-colors">Artikel</a></li>
+        <li><a href="/artikel-video" class="hover:text-[#49a35a] transition-colors">Artikel</a></li>
         <li><a href="/komunitas" class="hover:text-[#49a35a] transition-colors">Komunitas</a></li>
         <li><a href="/kalkulator" class="hover:text-[#49a35a] transition-colors">Kalkulator Gizi</a></li>
     </ul>
@@ -64,8 +64,13 @@
                     <a href="/ganti-password"
                        class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#49a35a] transition">
                         Ganti Kata Sandi
-                    </a>    
+                    </a>   
 
+                     <a href="/riwayat"
+                       class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-[#49a35a] transition">
+                        Riwayat
+                    </a>  
+    
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit"
@@ -98,7 +103,7 @@
 
     <ul class="flex flex-col items-center gap-4 py-6 text-gray-700 font-medium">
         <li><a href="/home" class="hover:text-[#49a35a] transition-colors">Beranda</a></li>
-        <li><a href="/artikel" class="hover:text-[#49a35a] transition-colors">Artikel</a></li>
+        <li><a href="/artikel-video" class="hover:text-[#49a35a] transition-colors">Artikel</a></li>
         <li><a href="/komunitas" class="hover:text-[#49a35a] transition-colors">Komunitas</a></li>
         <li><a href="/kalkulator" class="hover:text-[#49a35a] transition-colors">Kalkulator Gizi</a></li>
 
@@ -134,7 +139,12 @@
                 <a href="/ganti-password"
                    class="w-full py-3 text-center text-gray-900 border border-gray-300 rounded-full hover:bg-gray-100 transition font-semibold">
                     Ganti Kata Sandi
-                </a>    
+                </a> 
+
+                <a href="/riwayat"
+                    class="w-full py-3 text-center text-gray-900 border border-gray-300 rounded-full hover:bg-gray-100 transition font-semibold">
+                    Riwayat
+                </a>   
 
                 <form action="{{ route('logout') }}" method="POST">
                     @csrf

@@ -28,12 +28,23 @@
         </div>
 
         <div class="max-w-2xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="100">
+        <form action="{{ route('artikelvideo') }}" method="GET" class="flex gap-3">
             <input 
-                type="text" 
-                placeholder="Cari artikel atau video . . ." 
+                type="text"
+                name="search"
+                value="{{ request('search') }}"
+                placeholder="Cari judul artikel dan video..."
                 class="w-full rounded-2xl border border-slate-200 px-6 py-4 text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm"
             >
-        </div>
+
+            <button 
+                type="submit"
+                class="px-6 py-4 rounded-2xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition"
+            >
+                Cari
+            </button>
+        </form>
+    </div>
 
         <div class="flex justify-center gap-4 mb-10" data-aos="fade-up" data-aos-delay="150">
             <button id="btn-artikel" onclick="switchTab('artikel')" class="px-10 py-3 rounded-xl font-bold text-white bg-emerald-500 shadow-md transition-all duration-200 w-36 text-center">
@@ -45,35 +56,35 @@
         </div>
 
         <div id="tab-artikel" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="200">
-            
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition duration-300 flex flex-col">
-                <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Ibu dan anak" class="w-full h-52 object-cover">
-                <div class="p-6 flex-1 flex flex-col">
-                    <span class="w-fit px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold mb-3 border border-emerald-100">Asi & Menyusui</span>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2 leading-snug">Pentingnya ASI Eksklusif pada 6 Bulan Pertama</h3>
-                    <p class="text-sm text-gray-500 line-clamp-3">ASI Eksklusif memberikan nutrisi lengkap yang dibutuhkan bayi untuk tumbuh kembang optimal selama 6 bulan pertama kehidupan.</p>
+    
+        @forelse ($artikels as $artikel)
+            <a href="{{ route('artikel.show', $artikel->id) }}" class="block">
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition duration-300 flex flex-col h-full">
+                    <img 
+                        src="{{ $artikel->gambar ? asset('storage/' . $artikel->gambar) : 'https://via.placeholder.com/800x600?text=No+Image' }}" 
+                        alt="{{ $artikel->judul }}" 
+                        class="w-full h-52 object-cover"
+                    >
+                    <div class="p-6 flex-1 flex flex-col">
+                        <span class="w-fit px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold mb-3 border border-emerald-100">
+                            {{ $artikel->kategori }}
+                        </span>
+                        <h3 class="font-bold text-lg text-slate-900 mb-2 leading-snug">
+                            {{ $artikel->judul }}
+                        </h3>
+                        <p class="text-sm text-gray-500 line-clamp-3">
+                            {{ \Illuminate\Support\Str::limit(strip_tags($artikel->isi), 140) }}
+                        </p>
+                    </div>
                 </div>
+            </a>
+        @empty
+            <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center text-gray-500 py-10">
+                Belum ada artikel.
             </div>
+        @endforelse
 
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition duration-300 flex flex-col">
-                <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Stunting anak" class="w-full h-52 object-cover">
-                <div class="p-6 flex-1 flex flex-col">
-                    <span class="w-fit px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold mb-3 border border-emerald-100">Stunting</span>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2 leading-snug">Mengenal Tanda-Tanda Stunting pada Anak</h3>
-                    <p class="text-sm text-gray-500 line-clamp-3">Stunting adalah kondisi gagal tumbuh pada anak akibat kekurangan gizi kronis. Kenali tanda-tandanya sejak dini.</p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition duration-300 flex flex-col">
-                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="MPASI" class="w-full h-52 object-cover">
-                <div class="p-6 flex-1 flex flex-col">
-                    <span class="w-fit px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold mb-3 border border-emerald-100">MPASI</span>
-                    <h3 class="font-bold text-lg text-slate-900 mb-2 leading-snug">Panduan MPASI untuk Bayi 6-12 Bulan</h3>
-                    <p class="text-sm text-gray-500 line-clamp-3">Tips dan resep MPASI yang bergizi, aman, dan sesuai dengan tahapan perkembangan bayi Anda.</p>
-                </div>
-            </div>
-
-        </div>
+    </div>
 
         <div id="tab-video" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
             
