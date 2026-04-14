@@ -21,7 +21,7 @@ class ArtikelResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-newspaper';
 
-    protected static UnitEnum|string|null $navigationGroup = 'Daftar Artikel';
+    protected static UnitEnum|string|null $navigationGroup = 'Daftar Artikel & Video';
 
     protected static ?string $label = 'Artikel';
     

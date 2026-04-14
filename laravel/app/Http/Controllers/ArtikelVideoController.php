@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Artikel;
+use App\Models\Video;
 use Illuminate\Http\Request;
 
 class ArtikelVideoController extends Controller
@@ -17,7 +18,13 @@ class ArtikelVideoController extends Controller
             ->latest()
             ->get();
 
-        return view('artikelvideo', compact('artikels', 'search'));
+        $videos = Video::when($search, function ($query, $search) {
+                $query->where('judul', 'like', '%' . $search . '%');
+            })
+            ->latest()
+            ->get();
+
+        return view('artikelvideo', compact('artikels', 'videos', 'search'));
     }
 
     public function show($id)

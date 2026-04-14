@@ -2,6 +2,23 @@
 
 @section('title', 'Informasi Gizi Terpercaya')
 
+@php
+    function youtubeEmbedUrl($url)
+    {
+        if (!$url) return null;
+
+        if (str_contains($url, 'youtube.com/embed/')) {
+            return $url;
+        }
+
+        preg_match('/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&\?\s]+)/', $url, $matches);
+
+        return isset($matches[1])
+            ? 'https://www.youtube.com/embed/' . $matches[1]
+            : null;
+    }
+@endphp
+
 @section('content')
 <div class="min-h-screen bg-[#f7f9f7] py-12 px-4">
 
@@ -28,23 +45,23 @@
         </div>
 
         <div class="max-w-2xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="100">
-        <form action="{{ route('artikelvideo') }}" method="GET" class="flex gap-3">
-            <input 
-                type="text"
-                name="search"
-                value="{{ request('search') }}"
-                placeholder="Cari judul artikel dan video..."
-                class="w-full rounded-2xl border border-slate-200 px-6 py-4 text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm"
-            >
+            <form action="{{ route('artikelvideo') }}" method="GET" class="flex gap-3">
+                <input 
+                    type="text"
+                    name="search"
+                    value="{{ request('search') }}"
+                    placeholder="Cari judul artikel dan video..."
+                    class="w-full rounded-2xl border border-slate-200 px-6 py-4 text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm"
+                >
 
-            <button 
-                type="submit"
-                class="px-6 py-4 rounded-2xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition"
-            >
-                Cari
-            </button>
-        </form>
-    </div>
+                <button 
+                    type="submit"
+                    class="px-6 py-4 rounded-2xl bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition"
+                >
+                    Cari
+                </button>
+            </form>
+        </div>
 
         <div class="flex justify-center gap-4 mb-10" data-aos="fade-up" data-aos-delay="150">
             <button id="btn-artikel" onclick="switchTab('artikel')" class="px-10 py-3 rounded-xl font-bold text-white bg-emerald-500 shadow-md transition-all duration-200 w-36 text-center">
@@ -57,81 +74,74 @@
 
         <div id="tab-artikel" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="200">
     
-        @forelse ($artikels as $artikel)
-            <a href="{{ route('artikel.show', $artikel->id) }}" class="block">
-                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition duration-300 flex flex-col h-full">
-                    <img 
-                        src="{{ $artikel->gambar ? asset('storage/' . $artikel->gambar) : 'https://via.placeholder.com/800x600?text=No+Image' }}" 
-                        alt="{{ $artikel->judul }}" 
-                        class="w-full h-52 object-cover"
-                    >
-                    <div class="p-6 flex-1 flex flex-col">
-                        <span class="w-fit px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold mb-3 border border-emerald-100">
-                            {{ $artikel->kategori }}
-                        </span>
-                        <h3 class="font-bold text-lg text-slate-900 mb-2 leading-snug">
-                            {{ $artikel->judul }}
-                        </h3>
-                        <p class="text-sm text-gray-500 line-clamp-3">
-                            {{ \Illuminate\Support\Str::limit(strip_tags($artikel->isi), 140) }}
-                        </p>
+            @forelse ($artikels as $artikel)
+                <a href="{{ route('artikel.show', $artikel->id) }}" class="block">
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition duration-300 flex flex-col h-full">
+                        <img 
+                            src="{{ $artikel->gambar ? asset('storage/' . $artikel->gambar) : 'https://via.placeholder.com/800x600?text=No+Image' }}" 
+                            alt="{{ $artikel->judul }}" 
+                            class="w-full h-52 object-cover"
+                        >
+                        <div class="p-6 flex-1 flex flex-col">
+                            <span class="w-fit px-3 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold mb-3 border border-emerald-100">
+                                {{ $artikel->kategori }}
+                            </span>
+                            <h3 class="font-bold text-lg text-slate-900 mb-2 leading-snug">
+                                {{ $artikel->judul }}
+                            </h3>
+                            <p class="text-sm text-gray-500 line-clamp-3">
+                                {{ \Illuminate\Support\Str::limit(strip_tags($artikel->isi), 140) }}
+                            </p>
+                        </div>
                     </div>
+                </a>
+            @empty
+                <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center text-gray-500 py-10">
+                    Belum ada artikel.
                 </div>
-            </a>
-        @empty
-            <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center text-gray-500 py-10">
-                Belum ada artikel.
-            </div>
-        @endforelse
+            @endforelse
 
-    </div>
+        </div>
 
         <div id="tab-video" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 hidden">
             
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition duration-300 cursor-pointer group">
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Video Thumb" class="w-full h-52 object-cover group-hover:opacity-90 transition">
-                    <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs font-bold px-2 py-1 rounded">7:25</span>
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                        <div class="bg-white/80 rounded-full w-12 h-12 flex items-center justify-center">
-                            <i class="fa-solid fa-play text-emerald-500 text-xl"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-5">
-                    <h3 class="font-bold text-md text-slate-900 leading-snug">Kenapa bayi harus ASI? Pentingnya ASI Eksklusif pada 6 Bulan Pertama</h3>
-                </div>
-            </div>
+            @forelse ($videos as $video)
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition duration-300 flex flex-col group">
+                    <div class="relative">
+                        @php
+                            $embedUrl = youtubeEmbedUrl($video->url_video);
+                        @endphp
 
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition duration-300 cursor-pointer group">
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1519689680058-324335c77eba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Video Thumb" class="w-full h-52 object-cover group-hover:opacity-90 transition">
-                    <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs font-bold px-2 py-1 rounded">5:14</span>
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                        <div class="bg-white/80 rounded-full w-12 h-12 flex items-center justify-center">
-                            <i class="fa-solid fa-play text-emerald-500 text-xl"></i>
-                        </div>
+                        @if ($embedUrl)
+                            <iframe
+                                class="w-full h-52"
+                                src="{{ $embedUrl }}"
+                                title="{{ $video->judul }}"
+                                frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen>
+                            </iframe>
+                        @else
+                            <div class="w-full h-52 bg-gray-200 flex items-center justify-center text-gray-500 text-sm">
+                                Video tidak valid
+                            </div>
+                        @endif
                     </div>
-                </div>
-                <div class="p-5">
-                    <h3 class="font-bold text-md text-slate-900 leading-snug">ANAK PENDEK STUNTING?? Mengenal Tanda-Tanda Stunting pada Anak</h3>
-                </div>
-            </div>
 
-            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-200 hover:shadow-md transition duration-300 cursor-pointer group">
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Video Thumb" class="w-full h-52 object-cover group-hover:opacity-90 transition">
-                    <span class="absolute bottom-3 right-3 bg-black/70 text-white text-xs font-bold px-2 py-1 rounded">8:42</span>
-                    <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                        <div class="bg-white/80 rounded-full w-12 h-12 flex items-center justify-center">
-                            <i class="fa-solid fa-play text-emerald-500 text-xl"></i>
-                        </div>
+                    <div class="p-5 flex-1 flex flex-col">
+                        <h3 class="font-bold text-md text-slate-900 leading-snug mb-2">
+                            {{ $video->judul }}
+                        </h3>
+                        <p class="text-sm text-gray-500 line-clamp-3">
+                            {{ \Illuminate\Support\Str::limit(strip_tags($video->deskripsi), 120) }}
+                        </p>
                     </div>
                 </div>
-                <div class="p-5">
-                    <h3 class="font-bold text-md text-slate-900 leading-snug">Anak Mogok Makan Bun? Yuk Intip Panduan MPASI untuk Bayi 6-12 Bulan</h3>
+            @empty
+                <div class="col-span-1 md:col-span-2 lg:col-span-3 text-center text-gray-500 py-10">
+                    Belum ada video.
                 </div>
-            </div>
+            @endforelse
 
         </div>
 
@@ -158,9 +168,7 @@
         const tabArtikel = document.getElementById('tab-artikel');
         const tabVideo = document.getElementById('tab-video');
 
-        // Class untuk button aktif (Hijau solid)
         const activeClasses = "px-10 py-3 rounded-xl font-bold text-white bg-emerald-500 shadow-md transition-all duration-200 w-36 text-center border-2 border-emerald-500";
-        // Class untuk button tidak aktif (Putih border hijau)
         const inactiveClasses = "px-10 py-3 rounded-xl font-bold text-emerald-600 bg-white border-2 border-emerald-500 shadow-sm hover:bg-emerald-50 transition-all duration-200 w-36 text-center";
 
         if (tab === 'artikel') {
@@ -175,5 +183,17 @@
             tabArtikel.classList.add('hidden');
         }
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const hasSearch = @json(request()->filled('search'));
+        const artikelCount = {{ $artikels->count() }};
+        const videoCount = {{ $videos->count() }};
+
+        if (hasSearch && artikelCount === 0 && videoCount > 0) {
+            switchTab('video');
+        } else {
+            switchTab('artikel');
+        }
+    });
 </script>
 @endsection
