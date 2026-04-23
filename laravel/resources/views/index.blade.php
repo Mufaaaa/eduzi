@@ -33,7 +33,7 @@
                     <a href="#" class="bg-[#49a35a] hover:bg-[#3f8e4e] text-white px-6 py-3 rounded-xl text-sm font-semibold transition shadow-sm">
                         <i class="fas fa-notes-medical mr-2"></i>Cek Gizi Anak
                     </a>
-                    <a href="/artikel" class="bg-white border border-[#dfe6dc] hover:bg-[#f2f5ef] text-[#334d40] px-6 py-3 rounded-xl text-sm font-semibold transition">
+                    <a href="/artikel-video" class="bg-white border border-[#dfe6dc] hover:bg-[#f2f5ef] text-[#334d40] px-6 py-3 rounded-xl text-sm font-semibold transition">
                         <i class="far fa-newspaper mr-2"></i>Baca Artikel
                     </a>
                 </div>

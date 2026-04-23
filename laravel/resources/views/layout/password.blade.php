@@ -6,7 +6,7 @@
     <title>@yield('title', 'Laravel App')</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link rel="icon" type="image/png" href="{{ asset('images/Logo.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/EDUZI NEW LOGO.png') }}">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -21,7 +21,7 @@
     <details class="fixed bottom-6 right-6 z-50">
         <summary class="list-none cursor-pointer">
             <span class="inline-flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-lg border border-slate-200 hover:scale-105 transition">
-                <img src="{{ asset('images/Logo.png') }}" alt="Chat" class="h-8 w-8">
+                <img src="{{ asset('images/EDUZI NEW LOGO.png') }}" alt="Chat" class="h-8 w-8">
             </span>
         </summary>
 

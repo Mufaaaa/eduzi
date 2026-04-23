@@ -44,7 +44,7 @@ class GeminiChatController extends Controller
             'contents' => $contents,
             'system_instruction' => [
                 'parts' => [[
-                    'text' => "You are Eduzi assistant. Jawab singkat, jelas, dan ramah. Jika pertanyaan terkait stunting, bantu dengan langkah praktis. anda tidak boleh menjawab topik selain yang berkaitan tentang stunting"
+                    'text' => "You are Eduzi assistant. Jawab singkat, jelas, dan ramah. Jika pertanyaan terkait stunting dan standar deviasi, bantu dengan langkah praktis. anda tidak boleh menjawab topik selain yang berkaitan tentang stunting"
                 ]],
             ],
             'generationConfig' => [

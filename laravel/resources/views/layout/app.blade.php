@@ -48,7 +48,7 @@
   {{-- Tombol logo (toggle) --}}
   <summary class="list-none cursor-pointer">
     <span class="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/20 bg-white shadow-lg hover:scale-105 transition">
-      <img src="{{ asset('images/Logo.png') }}" alt="Chat" class="h-8 w-8">
+      <img src="{{ asset('images/EDUZI NEW LOGO.png') }}" alt="Chat" class="h-8 w-8">
     </span>
   </summary>
 
@@ -63,7 +63,7 @@
         textInput='{"placeholder":{"text":"Tanya apa aja di sini..."}}'
         introMessage='{"text":"Selamat datang di asisten Eduzi 👋"}'
         avatars='{
-          "ai": { "src": "{{ asset('images/Logo.png') }}", "shape": "circle", "size": "30px" },
+          "ai": { "src": "{{ asset('images/EDUZI NEW LOGO.png') }}", "shape": "circle", "size": "30px" },
           "user": { "color": "#facc15", "shape": "circle", "size": "30px" }
         }'
         connect='{

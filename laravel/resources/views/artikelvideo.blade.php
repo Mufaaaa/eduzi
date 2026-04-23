@@ -31,8 +31,8 @@
     <div class="max-w-6xl mx-auto mt-8">
         <div class="text-center mb-10" data-aos="fade-up">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-600 text-sm font-medium border border-emerald-100 mb-4">
-                <i class="fa-solid fa-book-open"></i>
-                <span>Artikel Edukasi</span>
+                <i class="fa-solid fa-photo-film"></i>
+                <span>Artikel Edukasi & Video Edukasi</span>
             </div>
 
             <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">

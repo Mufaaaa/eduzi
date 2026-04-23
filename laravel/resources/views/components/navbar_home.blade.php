@@ -13,9 +13,9 @@
     <!-- Logo -->
     <a href="/home" class="flex items-center space-x-3">
         <img 
-            src="{{ asset('images/Logo.png') }}" 
+            src="{{ asset('images/EDUZI NEW LOGO.png') }}" 
             alt="Logo Eduzi"
-            class="w-20 h-20 object-contain"
+            class="w-16 h-16 object-contain"
         >
     </a>
 
