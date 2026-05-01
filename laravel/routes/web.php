@@ -46,6 +46,9 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/kalkulator', [KalkulatorController::class, 'index'])->name('kalkulator');
 
 Route::get('/komunitas', [KomunitasController::class, 'index'])->name('komunitas');
+Route::post('/komunitas', [KomunitasController::class, 'store'])->name('komunitas.store');
+Route::post('/komunitas/komentar', [KomunitasController::class, 'komentar'])->name('komentar.store');
+Route::post('/like', [KomunitasController::class, 'like'])->name('like.store');
 
 Route::get('/panduan', [PanduanController::class, 'index'])->name('panduan');
 

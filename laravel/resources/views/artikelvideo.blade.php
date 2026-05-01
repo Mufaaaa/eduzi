@@ -151,7 +151,7 @@
             <div class="relative z-10">
                 <h2 class="text-2xl md:text-4xl font-bold mb-4">Mulai Pantau Gizi Anak Anda Sekarang</h2>
                 <p class="mb-8 text-emerald-50 text-base md:text-lg">Gunakan kalkulator gizi kami untuk mengetahui status gizi anak berdasarkan standar WHO.</p>
-                <a href="#" class="inline-flex items-center gap-2 bg-[#ff7b5c] hover:bg-[#e0674b] text-white font-bold py-3.5 px-8 rounded-xl transition duration-200 shadow-md">
+                <a href="/kalkulator" class="inline-flex items-center gap-2 bg-[#ff7b5c] hover:bg-[#e0674b] text-white font-bold py-3.5 px-8 rounded-xl transition duration-200 shadow-md">
                     <i class="fa-solid fa-calculator"></i>
                     Cek Gizi Sekarang
                 </a>

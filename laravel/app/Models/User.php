@@ -66,4 +66,9 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->hasMany(Video::class, 'id_user');
     }
+
+    public function komunitas()
+    {
+        return $this->hasMany(Komunitas::class, 'user_id');
+    }
 }
