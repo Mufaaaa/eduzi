@@ -21,4 +21,9 @@ class DataAnak extends Model
     {
         return $this->hasOne(HasilKalkulator::class, 'id_anak');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }

@@ -19,4 +19,6 @@ class HasilKalkulator extends Model
     {
         return $this->belongsTo(DataAnak::class, 'id_anak');
     }
+
+    
 }

@@ -26,7 +26,7 @@
     <!-- Modal Popup -->
     @include('components.modal')
 
-    <!-- Footer Index -->
+    <!-- Footer Home -->
     @include('components.footer-home')
 
 </div>
