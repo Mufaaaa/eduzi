@@ -13,6 +13,7 @@ class HasilKalkulator extends Model
         'hasil_prediksi',
         'penjelasan',
         'rekomendasi',
+        'bmi',
     ];
 
     public function dataAnak()

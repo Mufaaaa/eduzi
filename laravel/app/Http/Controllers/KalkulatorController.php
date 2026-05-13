@@ -17,7 +17,28 @@ class KalkulatorController extends Controller
 
     public function predict(Request $request)
     {
-        // Simpan data anak dulu
+        // =========================================
+        // VALIDASI INPUT
+        // =========================================
+
+        $request->validate([
+            'nama' => 'required',
+            'jenis_kelamin' => 'required',
+            'umur_bulan' => 'required|numeric|min:0',
+            'tinggi_badan' => 'required|numeric|min:1',
+            'berat_badan' => 'required|numeric|min:1',
+        ], [
+            'nama.required' => 'Nama anak wajib diisi',
+            'jenis_kelamin.required' => 'Jenis kelamin wajib dipilih',
+            'umur_bulan.required' => 'Usia wajib diisi',
+            'tinggi_badan.required' => 'Tinggi badan wajib diisi',
+            'berat_badan.required' => 'Berat badan wajib diisi',
+        ]);
+
+        // =========================================
+        // SIMPAN DATA ANAK
+        // =========================================
+
         $anak = DataAnak::create([
             'id_user' => Auth::check() ? Auth::id() : null,
 
@@ -32,7 +53,10 @@ class KalkulatorController extends Controller
             'berat_badan' => (float) $request->berat_badan,
         ]);
 
-        // Kirim ke FastAPI
+        // =========================================
+        // KIRIM KE FASTAPI
+        // =========================================
+
         $response = Http::timeout(30)->post(
             'http://127.0.0.1:8080/predict',
             [
@@ -48,7 +72,10 @@ class KalkulatorController extends Controller
 
         $hasil = $response->json();
 
-        // Simpan hasil kalkulator
+        // =========================================
+        // SIMPAN HASIL KALKULATOR
+        // =========================================
+
         HasilKalkulator::create([
             'id_anak' => $anak->id,
 
@@ -57,7 +84,13 @@ class KalkulatorController extends Controller
             'penjelasan' => $hasil['penjelasan'],
 
             'rekomendasi' => $hasil['rekomendasi'],
+
+            'bmi' => $hasil['bmi'],
         ]);
+
+        // =========================================
+        // RETURN VIEW
+        // =========================================
 
         return view('kalkulator', compact('hasil'));
     }

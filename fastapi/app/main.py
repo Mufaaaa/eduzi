@@ -37,6 +37,32 @@ scaler = joblib.load("app/models/scaler.joblib")
 encoder = joblib.load("app/models/Jenis Kelamin_encoder.joblib")
 
 # =========================================
+# WHO GIZI BURUK CHECK
+# =========================================
+
+def is_gizi_buruk(tinggi, berat):
+
+    batas_who = {
+        65: 5.2,
+        70: 6.0,
+        75: 6.7,
+        80: 7.5,
+        85: 8.4,
+        90: 9.3,
+        95: 10.3,
+        100: 11.2,
+        105: 12.2,
+        110: 13.3
+    }
+
+    tinggi_terdekat = min(
+        batas_who.keys(),
+        key=lambda x: abs(x - tinggi)
+    )
+
+    return berat < batas_who[tinggi_terdekat]
+
+# =========================================
 # REQUEST BODY
 # =========================================
 
@@ -124,6 +150,25 @@ def predict(data: PredictionInput):
         prediction = model.predict(scaled_data)[0]
 
         # =========================================
+        # CEK GIZI BURUK WHO
+        # =========================================
+
+        gizi_buruk = is_gizi_buruk(
+            data.tinggi_badan,
+            data.berat_badan
+        )
+
+        # =========================================
+        # HITUNG BMI
+        # =========================================
+
+        tinggi_meter = data.tinggi_badan / 100
+
+        bmi = data.berat_badan / (tinggi_meter ** 2)
+
+        bmi = round(bmi, 2)
+
+        # =========================================
         # HASIL PREDIKSI
         # =========================================
 
@@ -139,6 +184,20 @@ def predict(data: PredictionInput):
                 "Penting untuk memperhatikan asupan nutrisi harian, "
                 "terutama protein hewani, vitamin, dan mineral "
                 "agar pertumbuhan anak dapat lebih optimal."
+            )
+
+        elif gizi_buruk:
+
+            result = "Gizi Buruk"
+
+            penjelasan = (
+                "Gizi buruk merupakan kondisi ketika berat badan anak "
+                "sangat rendah dibanding tinggi badannya berdasarkan "
+                "indikator pertumbuhan anak.\n\n"
+                "Kondisi ini dapat menyebabkan gangguan pertumbuhan, "
+                "daya tahan tubuh menurun, dan anak lebih mudah sakit.\n\n"
+                "Perlu pemantauan pertumbuhan rutin, asupan nutrisi seimbang, "
+                "serta konsumsi protein, vitamin, dan mineral yang cukup."
             )
 
         else:
@@ -168,7 +227,13 @@ Data anak:
 - Umur: {data.umur_bulan} bulan
 - Tinggi badan: {data.tinggi_badan} cm
 - Berat badan: {data.berat_badan} kg
+- BMI: {bmi}
 - Status gizi: {result}
+
+Jika status gizi adalah:
+- Stunting → fokus pada pertumbuhan tinggi badan dan nutrisi jangka panjang
+- Gizi Buruk → fokus pada peningkatan berat badan, protein, kalori, dan pemulihan gizi
+- Gizi Baik (Normal) → fokus mempertahankan pola hidup sehat
 
 Berikan rekomendasi dengan format berikut:
 
@@ -252,6 +317,7 @@ Gunakan paragraf singkat dan rapi.
         return {
             "prediction": result,
             "prediction_code": int(prediction),
+            "bmi": bmi,
             "penjelasan": penjelasan,
             "rekomendasi": rekomendasi
         }

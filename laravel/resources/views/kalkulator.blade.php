@@ -36,6 +36,37 @@
              data-aos="fade-up"
              data-aos-delay="100">
 
+            <!-- VALIDATION ERROR -->
+            @if ($errors->any())
+
+                <div class="mb-6 rounded-2xl border border-red-200 bg-red-50 p-5">
+
+                    <div class="flex items-center gap-2 mb-3">
+
+                        <i class="fa-solid fa-circle-exclamation text-red-500"></i>
+
+                        <h3 class="text-red-600 font-bold">
+                            Form Belum Lengkap
+                        </h3>
+
+                    </div>
+
+                    <ul class="space-y-2">
+
+                        @foreach ($errors->all() as $error)
+
+                            <li class="text-sm text-red-500">
+                                • {{ $error }}
+                            </li>
+
+                        @endforeach
+
+                    </ul>
+
+                </div>
+
+            @endif
+
             <form action="{{ url('/predict') }}"
                   method="POST"
                   enctype="multipart/form-data">
@@ -58,6 +89,7 @@
                             type="text"
                             id="nama"
                             name="nama"
+                            value="{{ old('nama') }}"
                             placeholder="Masukkan nama anak"
                             class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400"
                         >
@@ -84,11 +116,13 @@
                                 Pilih jenis kelamin
                             </option>
 
-                            <option value="Laki-laki">
+                            <option value="Laki-laki"
+                                {{ old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>
                                 Laki-laki
                             </option>
 
-                            <option value="Perempuan">
+                            <option value="Perempuan"
+                                {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>
                                 Perempuan
                             </option>
 
@@ -110,6 +144,7 @@
                             type="number"
                             id="umur_bulan"
                             name="umur_bulan"
+                            value="{{ old('umur_bulan') }}"
                             placeholder="Contoh: 12"
                             class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400"
                         >
@@ -131,6 +166,7 @@
                             step="0.1"
                             id="berat_badan"
                             name="berat_badan"
+                            value="{{ old('berat_badan') }}"
                             placeholder="Contoh: 12"
                             class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400"
                         >
@@ -152,6 +188,7 @@
                             step="0.1"
                             id="tinggi_badan"
                             name="tinggi_badan"
+                            value="{{ old('tinggi_badan') }}"
                             placeholder="Contoh: 85"
                             class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400"
                         >
@@ -204,93 +241,107 @@
             @endif
 
             <!-- HASIL -->
-        @if(isset($hasil) && !isset($hasil['error']))
+            @if(isset($hasil) && !isset($hasil['error']))
 
-        <div class="mt-8 rounded-3xl border border-emerald-100 bg-emerald-50/60 p-6 md:p-8">
+            <div class="mt-8 rounded-3xl border border-emerald-100 bg-emerald-50/60 p-6 md:p-8">
 
-            <!-- HEADER -->
-            <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <!-- HEADER -->
+                <div class="flex items-center justify-between gap-4">
 
-                <div class="flex items-start gap-4">
+                    <!-- KIRI -->
+                    <div class="flex items-center gap-4">
 
-                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-400"></div>
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-400"></div>
 
-                    <div>
+                        <div>
+
+                            <p class="text-sm text-slate-500">
+                                Hasil Perhitungan
+                            </p>
+
+                            <h2 class="text-3xl font-bold text-emerald-600 leading-tight">
+                                {{ $hasil['prediction'] }}
+                            </h2>
+
+                        </div>
+
+                    </div>
+
+                    <!-- KANAN -->
+                    <div class="text-right">
 
                         <p class="text-sm text-slate-500">
-                            Hasil Prediksi
+                            Indeks Massa Tubuh (IMT)
                         </p>
 
-                        <h2 class="text-3xl font-bold text-emerald-600">
-                            {{ $hasil['prediction'] }}
-                        </h2>
+                        <h3 class="text-3xl font-bold text-emerald-600 leading-tight">
+                            {{ $hasil['bmi'] }}
+                        </h3>
 
                     </div>
 
                 </div>
 
-            </div>
+                <hr class="my-6 border-emerald-100">
 
-            <hr class="my-6 border-emerald-100">
+                <!-- PENJELASAN -->
+                <div>
 
-            <!-- PENJELASAN -->
-            <div>
+                    <h3 class="text-3xl font-bold text-slate-900 mb-4">
 
-                <h3 class="text-3xl font-bold text-slate-900 mb-4">
+                        Penjelasan
+                        <span class="text-emerald-500">
+                            Status Gizi
+                        </span>
 
-                    Penjelasan
-                    <span class="text-emerald-500">
-                        Status Gizi
-                    </span>
+                    </h3>
 
-                </h3>
+                    <p class="text-lg leading-9 text-slate-700 whitespace-pre-line">
+                        {{ $hasil['penjelasan'] }}
+                    </p>
 
-                <p class="text-lg leading-9 text-slate-700 whitespace-pre-line">
-                    {{ $hasil['penjelasan'] }}
-                </p>
+                </div>
 
-            </div>
+                <hr class="my-6 border-emerald-100">
 
-            <hr class="my-6 border-emerald-100">
+                <!-- REKOMENDASI -->
+                <div>
 
-            <!-- REKOMENDASI -->
-            <div>
+                    <h3 class="text-3xl font-bold text-slate-900 mb-4">
 
-                <h3 class="text-3xl font-bold text-slate-900 mb-4">
+                        Rekomendasi
+                        <span class="text-emerald-500">
+                            Pemenuhan Gizi
+                        </span>
 
-                    Rekomendasi
-                    <span class="text-emerald-500">
-                        Pemenuhan Gizi
-                    </span>
+                    </h3>
 
-                </h3>
+                    <div class="text-lg leading-9 text-slate-700 whitespace-pre-line">
+                        {!! nl2br(e($hasil['rekomendasi'])) !!}
+                    </div>
 
-                <div class="text-lg leading-9 text-slate-700 whitespace-pre-line">
-                    {!! nl2br(e($hasil['rekomendasi'])) !!}
+                </div>
+
+                <!-- DISCLAIMER -->
+                <div class="mt-5 rounded-2xl border border-red-200 bg-red-50 p-4">
+
+                    <p class="text-sm leading-7 text-red-500">
+
+                        <span class="font-bold">
+                            Disclaimer:
+                        </span>
+
+                        Hasil ini hanya berupa prediksi AI dan bukan diagnosis medis resmi.
+                        Untuk hasil yang lebih akurat, silakan konsultasikan dengan dokter
+                        atau ahli gizi anak.
+
+                    </p>
+
                 </div>
 
             </div>
 
-            <!-- DISCLAIMER -->
-            <div class="mt-5 rounded-2xl border border-red-200 bg-red-50 p-4">
-
-                <p class="text-sm leading-7 text-red-500">
-
-                    <span class="font-bold">
-                        Disclaimer:
-                    </span>
-
-                    Hasil ini hanya berupa prediksi AI dan bukan diagnosis medis resmi.
-                    Untuk hasil yang lebih akurat, silakan konsultasikan dengan dokter
-                    atau ahli gizi anak.
-
-                </p>
-
-            </div>
-
-        </div>
-
-        @endif
+            @endif
 
         </div>
     </div>
