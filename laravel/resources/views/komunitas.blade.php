@@ -141,13 +141,19 @@
                             <!-- BALAS -->
                             <form action="{{ route('komentar.store') }}" method="POST" class="mt-1">
                                 @csrf
+
                                 <input type="hidden" name="komunitas_id" value="{{ $item->id }}">
-                                <input type="hidden" name="reply_to_user_id" value="{{ $komen->user->id }}">
+
+                                <input 
+                                    type="hidden" 
+                                    name="reply_to_user_id" 
+                                    value="{{ $komen->user?->id }}"
+                                >
 
                                 <input 
                                     type="text"
                                     name="isi"
-                                    placeholder="Balas {{ $komen->user->name ?? 'Guest' }}..."
+                                    placeholder="Balas {{ $komen->user?->name ?? 'Guest' }}..."
                                     class="w-full border rounded p-1 text-xs"
                                 >
                             </form>
