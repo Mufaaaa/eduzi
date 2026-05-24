@@ -14,22 +14,30 @@
     <div class="max-w-5xl mx-auto">
 
         <!-- Header -->
-        <div class="text-center mb-10" data-aos="fade-up">
+        <x-page-header 
+            badge="Kalkulator Gizi Anak" 
+            title="Pantau <span class='text-emerald-500'>Status Gizi</span> Anak" 
+            subtitle="Masukkan data tumbuh kembang anak untuk menganalisis kecukupan gizinya secara akurat." 
+        />
 
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-50 text-emerald-600 text-sm font-medium border border-emerald-100">
-                <i class="fa-solid fa-clipboard-list"></i>
-                <span>Kalkulator Gizi Anak</span>
-            </div>
-
-            <h1 class="mt-5 text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-                Pantau <span class="text-emerald-500">Status Gizi</span> Anak
-            </h1>
-
-            <p class="mt-4 text-gray-500 text-base md:text-lg leading-relaxed max-w-2xl mx-auto">
-                Masukkan data anak untuk mengetahui status gizi berdasarkan AI.
-            </p>
-
-        </div>
+         <!-- Panduan Singkat -->
+         <div class="mb-16" data-aos="fade-up">
+             <h2 class="text-3xl font-bold text-slate-900 mb-4">
+                 Panduan Singkat
+             </h2>
+             <p class="text-lg leading-9 text-slate-700">
+                 Masukkan nama, jenis kelamin, usia, berat badan, dan tinggi badan anak untuk mendapatkan analisis status gizi yang akurat. Pastikan data yang dimasukkan benar untuk hasil terbaik.
+             </p>
+             <div class="mt-10 flex justify-center">
+                 <div class="w-28 h-28 rounded-full bg-white shadow-sm border border-slate-200 flex items-center justify-center overflow-hidden">
+                     <img
+                         src="{{ asset('images/child.png') }}"
+                         alt="Ilustrasi Anak"
+                         class="w-full h-full object-cover"
+                     >
+                 </div>
+             </div>
+         </div>
 
         <!-- Card Form -->
         <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 md:p-8"
