@@ -1,59 +1,109 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<h1 align="center">
+  <img src="public/images/EDUZI NEW LOGO.png" alt="Logo" height="40" style="vertical-align: middle; margin-right: 10px;">
+  <strong>Eduzi</strong>
+</h1>
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://img.shields.io/badge/Laravel-12-red?logo=laravel&style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Livewire-3-blueviolet?logo=livewire&style=for-the-badge" />
+  <img src="https://img.shields.io/badge/TailwindCSS-3-38bdf8?logo=tailwindcss&style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Status-In_Development-orange?style=for-the-badge" />
 </p>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<p align="center">
+  <img src="public/images/EDUZI NEW LOGO.png" alt="App Logo">
+</p>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<p align="center"><strong>Aplikasi Eduzi sebagai Media Edukasi Gizi Digital dalam Pencegahan Stunting.</strong></p>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 👥 Project Contributors – Eduzi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+| Name | Role | GitHub Username |
+|------|------|----------------|
+| Muhammad Faiq | Backend Developer & Database Integration | [@Mufaaaa](https://github.com/Mufaaaa) |
+| Nania Maharanny | Frontend Developer & UI/UX Designer | [@ljnnna](https://github.com/ljnnna) |
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+> 📝 *Each contributor played an important role in the development of Eduzi.*
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## 📦 About the Project
 
-## Contributing
+Eduzi adalah aplikasi edukasi gizi digital yang dirancang untuk membantu masyarakat memahami pentingnya gizi seimbang serta pencegahan stunting pada anak. Aplikasi ini menyediakan informasi kesehatan, kalkulator gizi, dan fitur edukatif yang mudah diakses sehingga dapat menjadi media pembelajaran digital bagi orang tua dan masyarakat dalam menjaga pertumbuhan dan kesehatan anak. 
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 🌟 Key Features
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- 🧮 **Kalkulator Gizi Anak** – Membantu memantau status gizi anak berdasarkan data pertumbuhan.
+- 📊 **Hasil Analisis Gizi** – Menampilkan kategori status gizi anak secara informatif.
+- 👤 **Riwayat Pemeriksaan** – Menyimpan data hasil pengecekan pengguna.
+- 📚 **Konten Edukasi** – Artikel dan video seputar gizi dan pencegahan stunting.
+- 💬 **Forum Komunitas** – Tempat berbagi pengalaman dan diskusi bersama pengguna lain.
+---
 
-## Security Vulnerabilities
+## 🛠️ Tech Stack
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Backend:** Laravel 12, MySQL  
+- **Frontend:** TailwindCSS, Blade  
+- **Full-stack Tooling:** Livewire  
+- **Admin Panel:** Filament  
+- **Dependency Tools:** npm, Composer  
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 🚀 Getting Started
+
+### **Prerequisites**
+- PHP 8.3+
+- Composer
+- Node.js & NPM
+- MySQL
+
+---
+
+### 💻 Installation (Step-by-Step)
+
+1. **Clone the repository and navigate to the project directory**
+    ```bash
+    git clone https://github.com/Mufaaaa/eduzi.git
+   cd laravel
+    ```
+
+2. **Install backend and frontend dependencies**
+    ```bash
+    composer install
+    npm install
+    ```
+
+3. **Copy and configure the environment file**
+    ```bash
+    cp .env.example .env
+    # Edit the .env file:
+    # - DB_DATABASE=your_database
+    # - DB_USERNAME=your_username
+    # - DB_PASSWORD=your_password
+    ```
+
+4. **Generate application key and migrate the database**
+    ```bash
+    php artisan key:generate
+    php artisan migrate --seed
+    ```
+
+5. **Build frontend assets and run the development server**
+    ```bash
+    npm run dev
+    php artisan serve
+    ```
+
+🔗 Access the application via your browser: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+---
