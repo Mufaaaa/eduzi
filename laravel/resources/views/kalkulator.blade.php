@@ -20,25 +20,6 @@
             subtitle="Masukkan data tumbuh kembang anak untuk menganalisis kecukupan gizinya secara akurat." 
         />
 
-         <!-- Panduan Singkat -->
-         <div class="mb-16" data-aos="fade-up">
-             <h2 class="text-3xl font-bold text-slate-900 mb-4">
-                 Panduan Singkat
-             </h2>
-             <p class="text-lg leading-9 text-slate-700">
-                 Masukkan nama, jenis kelamin, usia, berat badan, dan tinggi badan anak untuk mendapatkan analisis status gizi yang akurat. Pastikan data yang dimasukkan benar untuk hasil terbaik.
-             </p>
-             <div class="mt-10 flex justify-center">
-                 <div class="w-28 h-28 rounded-full bg-white shadow-sm border border-slate-200 flex items-center justify-center overflow-hidden">
-                     <img
-                         src="{{ asset('images/child.png') }}"
-                         alt="Ilustrasi Anak"
-                         class="w-full h-full object-cover"
-                     >
-                 </div>
-             </div>
-         </div>
-
         <!-- Card Form -->
         <div class="bg-white border border-slate-200 rounded-2xl shadow-sm p-6 md:p-8"
              data-aos="fade-up"
