@@ -248,7 +248,15 @@
                                 Hasil Perhitungan
                             </p>
 
-                            <h2 class="text-3xl font-bold text-emerald-600 leading-tight">
+                            @php
+                                $textColor = match ($hasil['prediction']) {
+                                    'Gizi Buruk' => 'text-orange-600',
+                                    'Stunting' => 'text-red-500', 
+                                    default => 'text-emerald-600', 
+                                };
+                            @endphp
+
+                            <h2 class="text-3xl font-bold {{ $textColor }} leading-tight">
                                 {{ $hasil['prediction'] }}
                             </h2>
 
@@ -263,7 +271,15 @@
                             Indeks Massa Tubuh (IMT)
                         </p>
 
-                        <h3 class="text-3xl font-bold text-emerald-600 leading-tight">
+                        @php
+                            $textColor = match ($hasil['prediction']) {
+                                'Gizi Buruk' => 'text-orange-600',
+                                'Stunting' => 'text-red-500',
+                                default => 'text-emerald-600',
+                            };
+                        @endphp
+                        
+                        <h3 class="text-3xl font-bold {{ $textColor }} leading-tight">
                             {{ $hasil['bmi'] }}
                         </h3>
 
