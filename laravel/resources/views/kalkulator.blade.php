@@ -240,7 +240,41 @@
                     <!-- KIRI -->
                     <div class="flex items-center gap-4">
 
-                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-r from-emerald-500 to-emerald-400"></div>
+                        @php
+                            $prediction = strtolower(trim($hasil['prediction']));
+
+                            if (str_contains($prediction, 'baik')) {
+                                $statusConfig = [
+                                    'bg' => 'bg-emerald-100',
+                                    'icon' => 'fa-solid fa-circle-check',
+                                    'iconColor' => 'text-emerald-600',
+                                ];
+                            } elseif (str_contains($prediction, 'buruk')) {
+                                $statusConfig = [
+                                    'bg' => 'bg-orange-100',
+                                    'icon' => 'fa-solid fa-triangle-exclamation',
+                                    'iconColor' => 'text-orange-600',
+                                ];
+                            } elseif (str_contains($prediction, 'stunting')) {
+                                $statusConfig = [
+                                    'bg' => 'bg-red-100',
+                                    'icon' => 'fa-solid fa-ruler-vertical',
+                                    'iconColor' => 'text-red-500',
+                                ];
+                            } else {
+                                $statusConfig = [
+                                    'bg' => 'bg-slate-100',
+                                    'icon' => 'fa-solid fa-circle-info',
+                                    'iconColor' => 'text-slate-500',
+                                ];
+                            }
+                        @endphp
+
+                        <div class="w-14 h-14 rounded-2xl {{ $statusConfig['bg'] }} flex items-center justify-center">
+
+                            <i class="{{ $statusConfig['icon'] }} text-2xl {{ $statusConfig['iconColor'] }}"></i>
+
+                        </div>
 
                         <div>
 
@@ -301,7 +335,7 @@
 
                     </h3>
 
-                    <p class="text-lg leading-9 text-slate-700 whitespace-pre-line">
+                    <p class="text-base md:text-lg leading-7 text-slate-700 text-justify whitespace-pre-line">
                         {{ $hasil['penjelasan'] }}
                     </p>
 
@@ -321,7 +355,7 @@
 
                     </h3>
 
-                    <div class="text-lg leading-9 text-slate-700 whitespace-pre-line">
+                    <div class="text-base md:text-lg leading-7 text-slate-700 text-justify whitespace-pre-line">
                         {!! nl2br(e($hasil['rekomendasi'])) !!}
                     </div>
 
