@@ -21,7 +21,7 @@
 
             <!-- Logo Mobile -->
             <div class="flex flex-col items-center mb-8 lg:hidden">
-                <img src="{{ asset('images/Logo.png') }}" alt="Logo Eduzi" class="w-20 h-20 object-contain mb-4">
+                <img src="{{ asset('images/EDUZI NEW LOGO.png') }}" alt="Logo Eduzi" class="w-20 h-20 object-contain mb-4">
             </div>
 
             <!-- Heading -->

@@ -8,7 +8,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="{{ asset('images/Logo.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('images/EDUZI NEW LOGO.png') }}">
 
   <!-- Font & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">

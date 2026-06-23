@@ -1,6 +1,6 @@
 <div class="hidden lg:flex bg-[#eaf6ee] items-center justify-center px-10 py-12">
     <div class="text-center max-w-md">
-        <img src="{{ asset('images/Logo.png') }}" alt="Logo Eduzi" class="w-28 h-28 object-contain mx-auto mb-6">
+        <img src="{{ asset('images/EDUZI NEW LOGO.png') }}" alt="Logo Eduzi" class="w-28 h-28 object-contain mx-auto mb-6">
 
         <h2 class="text-3xl font-bold mb-4 text-[#1f3b2f]">
             Selamat Datang di <span class="text-[#49a35a]">Eduzi</span>
