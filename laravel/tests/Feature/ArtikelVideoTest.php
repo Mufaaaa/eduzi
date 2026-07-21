@@ -10,7 +10,16 @@ class ArtikelVideoTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_search_artikel()
+    public function test_artikel_video_page_can_be_accessed()
+    {
+        $response = $this->get('/artikel-video');
+
+        $response->assertStatus(200);
+
+        $response->assertViewIs('artikelvideo');
+    }
+
+    public function test_search_artikel_video()
     {
         Artikel::factory()->create([
             'judul' => 'Laravel Testing'

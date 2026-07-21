@@ -1,19 +1,21 @@
 @props(['videos'])
 
 @php
-function youtubeEmbedUrl($url)
-{
-    if (!$url) return null;
+if (!function_exists('youtubeEmbedUrl')) {
+    function youtubeEmbedUrl($url)
+    {
+        if (!$url) return null;
 
-    if (str_contains($url, 'youtube.com/embed/')) {
-        return $url;
+        if (str_contains($url, 'youtube.com/embed/')) {
+            return $url;
+        }
+
+        preg_match('/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&\?\s]+)/', $url, $matches);
+
+        return isset($matches[1])
+            ? 'https://www.youtube.com/embed/' . $matches[1]
+            : null;
     }
-
-    preg_match('/(?:youtu\.be\/|youtube\.com\/watch\?v=)([^&\?\s]+)/', $url, $matches);
-
-    return isset($matches[1])
-        ? 'https://www.youtube.com/embed/' . $matches[1]
-        : null;
 }
 @endphp
 
