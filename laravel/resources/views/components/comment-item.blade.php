@@ -22,14 +22,23 @@
 
     <form action="{{ route('komentar.store') }}" method="POST" class="mt-2">
         @csrf
+
         <input type="hidden" name="komunitas_id" value="{{ $itemId }}">
         <input type="hidden" name="reply_to_user_id" value="{{ $komen->user?->id }}">
 
-        <input 
+        <input
             type="text"
             name="isi"
             placeholder="Balas {{ $komen->user?->name ?? 'Guest' }}..."
             class="w-full border border-slate-200 bg-white rounded-lg p-1.5 text-xs outline-none focus:border-emerald-400 transition"
+            required
         >
+
+        <button
+            type="submit"
+            class="mt-2 px-3 py-1 bg-emerald-500 text-white rounded-lg text-xs hover:bg-emerald-600"
+        >
+            Kirim Balasan
+        </button>
     </form>
 </div>
