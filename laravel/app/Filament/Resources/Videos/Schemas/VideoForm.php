@@ -13,7 +13,9 @@ class VideoForm
             ->components([
                 Forms\Components\TextInput::make('judul')
                     ->label('Judul Video')
-                    ->required(),
+                    ->required()
+                    ->minLength(20)
+                    ->helperText('Judul minimal 20 karakter'),
                 Forms\Components\TextInput::make('url_video')
                     ->label('URL Video')
                     ->required(),

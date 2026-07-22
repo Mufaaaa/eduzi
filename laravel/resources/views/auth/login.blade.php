@@ -63,7 +63,7 @@
                         placeholder="Masukkan kata sandi"
                     >
                         <x-slot:labelLink>
-                            <a href="#" class="text-[#49a35a] text-sm hover:underline">Lupa kata sandi?</a>
+                            <a href="#" class="text-[#49a35a] text-sm hover:underline"></a>
                         </x-slot:labelLink>
 
                         <x-slot:append>

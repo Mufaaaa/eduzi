@@ -13,12 +13,14 @@ class ArtikelForm
             ->components([
 
                 Forms\Components\TextInput::make('kategori')
-                        ->label('Kategori')
-                        ->required(),
+                    ->label('Kategori')
+                    ->required(),
 
                 Forms\Components\TextInput::make('judul')
                     ->label('Judul Artikel')
-                    ->required(),
+                    ->required()
+                    ->minLength(20)
+                    ->helperText('Judul minimal 20 karakter'),
 
                 Forms\Components\RichEditor::make('isi')
                     ->label('Isi Artikel')
