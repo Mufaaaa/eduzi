@@ -13,7 +13,7 @@ class RegistrationTest extends TestCase
     {
         $response = $this->post('/daftar', [
             'name' => 'Faiq',
-            'email' => 'faiq@example.com',
+            'email' => 'faiq@gmail.com',
             'password' => 'password123',
             'password_confirmation' => 'password123',
             'terms' => 'on',
@@ -22,7 +22,7 @@ class RegistrationTest extends TestCase
         $response->assertRedirect('/masuk');
 
         $this->assertDatabaseHas('users', [
-            'email' => 'faiq@example.com',
+            'email' => 'faiq@gmail.com',
             'name' => 'Faiq',
             'role' => 'pengguna',
         ]);
