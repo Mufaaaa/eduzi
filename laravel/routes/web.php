@@ -14,6 +14,7 @@ use App\Http\Controllers\KomunitasController;
 use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\ArtikelVideoController;
+use App\Http\Controllers\ForgotPasswordController;
 
 Route::get('/', [IndexController::class, 'index']);
 
@@ -22,6 +23,12 @@ Route::post('/daftar', [RegisterController::class, 'store'])->name('register.sto
 
 Route::get('/masuk', [LoginController::class, 'index'])->name('login');
 Route::post('/masuk', [LoginController::class, 'authenticate'])->name('login.authenticate');
+
+Route::get('/lupa-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/lupa-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
+
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
 
 Route::view('/syarat-ketentuan', 'auth.terms')->name('terms');
 Route::view('/kebijakan-privasi', 'auth.privacy')->name('privacy');
