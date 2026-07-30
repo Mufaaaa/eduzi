@@ -15,6 +15,7 @@ use App\Http\Controllers\PanduanController;
 use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\ArtikelVideoController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\PosyanduController;
 
 Route::get('/', [IndexController::class, 'index']);
 
@@ -64,5 +65,7 @@ Route::get('/artikel-video', [ArtikelVideoController::class, 'index'])->name('ar
 Route::get('/artikel/{id}', [ArtikelVideoController::class, 'show'])->name('artikel.show');
 
 Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat');
+
+Route::get('/jadwal-posyandu', [PosyanduController::class, 'index'])->name('posyandu.index');
 
 Route::post('/deep-chat', [GeminiChatController::class, 'handle'])->withoutMiddleware(['web']);
