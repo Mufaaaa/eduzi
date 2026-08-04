@@ -65,6 +65,7 @@ Route::get('/artikel-video', [ArtikelVideoController::class, 'index'])->name('ar
 Route::get('/artikel/{id}', [ArtikelVideoController::class, 'show'])->name('artikel.show');
 
 Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat');
+Route::get('/riwayat/export/pdf', [RiwayatController::class, 'exportPdf'])->name('riwayat.export');
 
 Route::get('/jadwal-posyandu', [PosyanduController::class, 'index'])->name('posyandu.index');
 

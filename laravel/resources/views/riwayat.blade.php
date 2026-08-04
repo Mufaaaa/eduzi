@@ -29,6 +29,40 @@
                 Riwayat Kalkulator Gizi
             </span>
 
+            <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-6">
+
+            <form method="GET" action="{{ route('riwayat') }}" class="flex gap-3 items-end">
+
+                <div>
+                    <label class="block text-sm text-gray-600 mb-1">
+                        Tanggal Tes
+                    </label>
+
+                    <input
+                        type="date"
+                        name="tanggal"
+                        value="{{ request('tanggal') }}"
+                        class="border rounded-lg px-4 py-2 focus:ring-2 focus:ring-emerald-500">
+                </div>
+
+                <button
+                    type="submit"
+                    class="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2 rounded-lg">
+                    Filter
+                </button>
+
+            </form>
+
+            <a
+                href="{{ route('riwayat.export', ['tanggal' => request('tanggal')]) }}"
+                class="bg-red-500 hover:bg-red-600 text-white px-5 py-2 rounded-lg">
+
+                Export PDF
+
+            </a>
+
+        </div>
+
             <!-- Loop data dengan komponen baru yang sudah bisa buka-tutup -->
             @foreach ($riwayat as $item)
                 <x-riwayat-card :item="$item" />

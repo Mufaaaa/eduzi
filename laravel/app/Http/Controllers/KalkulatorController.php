@@ -92,6 +92,9 @@ class KalkulatorController extends Controller
         // RETURN VIEW
         // =========================================
 
-        return view('kalkulator', compact('hasil'));
+        return view('kalkulator', [
+        'hasil' => $hasil,
+        'input' => $request->all(),
+    ]);
     }
 }

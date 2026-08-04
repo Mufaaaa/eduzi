@@ -78,7 +78,7 @@
                             type="text"
                             id="nama"
                             name="nama"
-                            value="{{ old('nama') }}"
+                            value="{{ old('nama', $input['nama'] ?? '') }}"
                             placeholder="Masukkan nama anak"
                             class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400"
                         >
@@ -106,12 +106,12 @@
                             </option>
 
                             <option value="Laki-laki"
-                                {{ old('jenis_kelamin') == 'Laki-laki' ? 'selected' : '' }}>
+                                {{ old('jenis_kelamin', $input['jenis_kelamin'] ?? '') == 'Laki-laki' ? 'selected' : '' }}>
                                 Laki-laki
                             </option>
 
                             <option value="Perempuan"
-                                {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>
+                                {{ old('jenis_kelamin', $input['jenis_kelamin'] ?? '') == 'Perempuan' ? 'selected' : '' }}>
                                 Perempuan
                             </option>
 
@@ -133,7 +133,7 @@
                             type="number"
                             id="umur_bulan"
                             name="umur_bulan"
-                            value="{{ old('umur_bulan') }}"
+                            value="{{ old('umur_bulan', $input['umur_bulan'] ?? '') }}"
                             placeholder="Contoh: 12"
                             class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400"
                         >
@@ -155,7 +155,7 @@
                             step="0.1"
                             id="berat_badan"
                             name="berat_badan"
-                            value="{{ old('berat_badan') }}"
+                            value="{{ old('berat_badan', $input['berat_badan'] ?? '') }}"
                             placeholder="Contoh: 12"
                             class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400"
                         >
@@ -177,7 +177,7 @@
                             step="0.1"
                             id="tinggi_badan"
                             name="tinggi_badan"
-                            value="{{ old('tinggi_badan') }}"
+                            value="{{ old('tinggi_badan', $input['tinggi_badan'] ?? '') }}"
                             placeholder="Contoh: 85"
                             class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-400 focus:border-emerald-400"
                         >

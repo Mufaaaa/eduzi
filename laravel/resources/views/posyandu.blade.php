@@ -3,6 +3,14 @@
 @section('title', 'Jadwal Posyandu')
 
 @section('content')
+
+@php
+    use Carbon\Carbon;
+
+    // Cek apakah hari ini tanggal 21
+    $isPosyanduDay = Carbon::now()->day == 21;
+@endphp
+
 <div class="min-h-screen bg-[#F8FAF5] py-10">
 
     @auth
@@ -12,6 +20,28 @@
     @endauth
 
     <div class="max-w-5xl mx-auto px-4">
+
+    @if($isPosyanduDay)
+        <div class="mb-8 rounded-2xl bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg p-6">
+            <div class="flex items-center gap-4">
+                <div class="text-5xl">
+                    🔔
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold">
+                        Hari Ini Ada Jadwal Posyandu!
+                    </h2>
+
+                    <p class="mt-2 text-green-100">
+                        Jangan lupa datang ke <b>Posyandu Melati</b> pukul
+                        <b>08.00 WIB</b> dan membawa Buku KIA/KMS untuk
+                        pemeriksaan tumbuh kembang anak.
+                    </p>
+                </div>
+            </div>
+        </div>
+@endif
 
         {{-- Header --}}
         <div class="text-center mb-10">
@@ -239,5 +269,18 @@
     </div>
 
 </div>
+@if($isPosyanduDay)
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    alert(
+        "🔔 PENGINGAT POSYANDU\n\n" +
+        "Hari ini adalah jadwal Posyandu.\n\n" +
+        "📍 Posyandu Melati\n" +
+        "🕘 08.00 WIB\n\n" +
+        "Jangan lupa membawa Buku KIA/KMS."
+    );
+});
+</script>
+@endif
 @include('components.footerindex')
 @endsection
