@@ -29,7 +29,7 @@ Route::get('/lupa-password', [ForgotPasswordController::class, 'showLinkRequestF
 Route::post('/lupa-password', [ForgotPasswordController::class, 'sendResetLink'])->name('password.email');
 
 Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
-Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.update');
+Route::post('/reset-password', [ForgotPasswordController::class, 'resetPassword'])->name('password.reset.submit');
 
 Route::view('/syarat-ketentuan', 'auth.terms')->name('terms');
 Route::view('/kebijakan-privasi', 'auth.privacy')->name('privacy');
