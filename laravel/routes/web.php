@@ -16,6 +16,7 @@ use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\ArtikelVideoController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\PosyanduController;
+use App\Http\Controllers\PemantauanController;
 
 Route::get('/', [IndexController::class, 'index']);
 
@@ -47,6 +48,13 @@ Route::middleware(['auth'])->group(function () {
         ->name('password.edit');
     Route::post('/ganti-password', [ChangePasswordController::class, 'update'])
         ->name('password.update');
+
+    Route::get('/pemantauan', [PemantauanController::class, 'index'])
+        ->name('pemantauan');
+
+    Route::get('/pemantauan/grafik', [PemantauanController::class, 'grafik'])
+        ->name('grafik.perkembangan');
+    
 
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
