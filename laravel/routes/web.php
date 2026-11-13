@@ -160,6 +160,5 @@ Route::middleware(['auth', PreventAuthPageCache::class])->group(function () {
 // ======================================================
 // GEMINI CHAT
 // ======================================================
-
 Route::post('/deep-chat', [GeminiChatController::class, 'handle'])
-    ->middleware('auth');
+    ->name('deep-chat');
