@@ -7,11 +7,30 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+    /**
+     * Menampilkan halaman login.
+     */
     public function index()
     {
-        return view('auth.login');
+        // Jika pengguna sudah login, jangan tampilkan halaman login.
+        if (Auth::guard('web')->check()) {
+            $user = Auth::guard('web')->user();
+
+            return $user->role === 'admin'
+                ? redirect('/admin')
+                : redirect('/home');
+        }
+
+        return response()
+            ->view('auth.login')
+            ->header('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0')
+            ->header('Pragma', 'no-cache')
+            ->header('Expires', 'Sat, 01 Jan 2000 00:00:00 GMT');
     }
 
+    /**
+     * Proses autentikasi login biasa.
+     */
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
@@ -24,10 +43,13 @@ class LoginController extends Controller
         ]);
 
         if (Auth::guard('web')->attempt($credentials)) {
+
+            // Regenerasi session untuk keamanan.
             $request->session()->regenerate();
 
             $user = Auth::guard('web')->user();
 
+            // Redirect berdasarkan role.
             if ($user->role === 'admin') {
                 return redirect('/admin');
             }
@@ -35,16 +57,26 @@ class LoginController extends Controller
             return redirect('/home');
         }
 
-        return back()->withInput()->with('error', 'Email atau password salah.');
+        return back()
+            ->withInput($request->only('email'))
+            ->with('error', 'Email atau password salah.');
     }
 
+    /**
+     * Proses logout.
+     */
     public function logout(Request $request)
     {
+        // Logout pengguna.
         Auth::guard('web')->logout();
 
+        // Hapus session lama.
         $request->session()->invalidate();
+
+        // Regenerasi CSRF token.
         $request->session()->regenerateToken();
 
-        return redirect('/masuk')->with('success', 'Berhasil logout.');
+        return redirect('/masuk')
+            ->with('success', 'Berhasil logout.');
     }
 }

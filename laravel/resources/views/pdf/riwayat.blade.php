@@ -61,27 +61,37 @@ Tanggal Tes :
 
 <tbody>
 
-@foreach($riwayat as $item)
+    @foreach($riwayat as $item)
 
-<tr>
+    <tr>
+        <td>{{ $loop->iteration }}</td>
 
-<td>{{ $loop->iteration }}</td>
+        <td>
+            {{ $item->dataAnak->nama_anak ?? '-' }}
+        </td>
 
-<td>{{ $item->dataAnak->nama_anak ?? '-' }}</td>
+        <td>
+            {{ $item->dataAnak->umur_bulan ?? '-' }} bulan
+        </td>
 
-<td>{{ $item->umur }} bulan</td>
+        <td>
+            {{ $item->dataAnak->berat_badan ?? '-' }} kg
+        </td>
 
-<td>{{ $item->berat }} kg</td>
+        <td>
+            {{ $item->dataAnak->tinggi_badan ?? '-' }} cm
+        </td>
 
-<td>{{ $item->tinggi }} cm</td>
+        <td>
+            {{ $item->hasil_prediksi ?? '-' }}
+        </td>
 
-<td>{{ $item->hasil_prediksi }}</td>
+        <td>
+            {{ $item->created_at ? $item->created_at->format('d-m-Y') : '-' }}
+        </td>
+    </tr>
 
-<td>{{ $item->created_at->format('d-m-Y') }}</td>
-
-</tr>
-
-@endforeach
+    @endforeach
 
 </tbody>
 
