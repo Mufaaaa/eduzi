@@ -11,11 +11,23 @@ use Laravel\Socialite\Facades\Socialite;
 class GoogleController extends Controller
 {
     /**
+     * Menentukan callback berdasarkan domain yang sedang diakses.
+     */
+    private function getGoogleRedirectUrl(): string
+    {
+        return request()->getSchemeAndHttpHost()
+            . '/auth/google/callback';
+    }
+
+    /**
      * Redirect ke halaman autentikasi Google.
      */
     public function redirect()
     {
+        $redirectUrl = $this->getGoogleRedirectUrl();
+
         return Socialite::driver('google')
+            ->redirectUrl($redirectUrl)
             ->with([
                 'prompt' => 'select_account',
             ])
@@ -28,7 +40,11 @@ class GoogleController extends Controller
     public function callback()
     {
         try {
-            $googleUser = Socialite::driver('google')->user();
+            $redirectUrl = $this->getGoogleRedirectUrl();
+
+            $googleUser = Socialite::driver('google')
+                ->redirectUrl($redirectUrl)
+                ->user();
 
             // Cari pengguna berdasarkan Google ID atau email.
             $user = User::where('google_id', $googleUser->getId())
