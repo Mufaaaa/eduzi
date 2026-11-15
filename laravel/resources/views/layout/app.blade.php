@@ -55,24 +55,36 @@
   {{-- Panel chat --}}
   <div
     class="mt-3 w-[min(420px,90vw)] h-[min(560px,75vh)] rounded-2xl overflow-hidden shadow-2xl
-           bg-white text-slate-900 border border-slate-200">
-      <deep-chat
-        id="deepchat"
-        class="block h-full w-full"
-        style="height:100%;width:100%;"
-        textInput='{"placeholder":{"text":"Tanya apa aja di sini..."}}'
-        introMessage='{"text":"Selamat datang di asisten Eduzi 👋"}'
-        avatars='{
-          "ai": { "src": "{{ asset('images/EDUZI NEW LOGO.png') }}", "shape": "circle", "size": "30px" },
-          "user": { "color": "#facc15", "shape": "circle", "size": "30px" }
-        }'
-        connect='{
+           bg-white text-slate-900 border border-slate-200">  
+  <deep-chat
+      id="deepchat"
+      class="block h-full w-full"
+      style="height:100%;width:100%;"
+      textInput='{"placeholder":{"text":"Tanya apa aja di sini..."}}'
+      introMessage='{"text":"Selamat datang di asisten Eduzi 👋"}'
+      avatars='{
+          "ai": {
+              "src": "{{ asset('images/EDUZI NEW LOGO.png') }}",
+              "shape": "circle",
+              "size": "30px"
+          },
+          "user": {
+              "color": "#facc15",
+              "shape": "circle",
+              "size": "30px"
+          }
+      }'
+      connect='{
           "url": "/deep-chat",
           "method": "POST",
-          "headers": { "X-Requested-With": "XMLHttpRequest" }
+          "headers": {
+              "X-Requested-With": "XMLHttpRequest",
+              "X-CSRF-TOKEN": "{{ csrf_token() }}"
+          }
+      }'
+  >
+  </deep-chat>
 
-        }'
-      ></deep-chat>
     </div>
   </details>
 

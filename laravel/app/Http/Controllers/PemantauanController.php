@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataAnak;
+use App\Models\HasilKalkulator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PemantauanController extends Controller
 {
     /**
-     * Dashboard Pemantauan Anak
+     * Dashboard Pemantauan Anak.
      */
     public function index(Request $request)
     {
@@ -17,59 +18,124 @@ class PemantauanController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Ambil seluruh data anak milik user
+        | Ambil data anak milik pengguna
         |--------------------------------------------------------------------------
         */
 
-        $anakList = DataAnak::where('id_user', $userId)
-            ->orderBy('created_at', 'desc')
+        $semuaAnak = DataAnak::where('id_user', $userId)
+            ->orderByDesc('created_at')
+            ->orderByDesc('id')
             ->get();
 
         /*
         |--------------------------------------------------------------------------
-        | Pilih anak
+        | Dropdown: satu nama hanya muncul sekali
         |--------------------------------------------------------------------------
+        |
+        | Karena setiap pemeriksaan dapat membuat record data_anak baru,
+        | gunakan nama sebagai pengelompokan sementara.
+        | Record terbaru untuk setiap nama menjadi pilihan dropdown.
+        |
         */
 
+        $anakList = $semuaAnak
+            ->unique(function ($item) {
+                return mb_strtolower(trim($item->nama_anak));
+            })
+            ->values();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Tentukan anak yang dipilih
+        |--------------------------------------------------------------------------
+        |
+        | Parameter anak tetap menggunakan ID data_anak agar kompatibel
+        | dengan link grafik yang sudah ada.
+        |
+        */
+
+        $anakTerpilih = null;
+
         if ($request->filled('anak')) {
-
-            $anak = DataAnak::where('id', $request->anak)
-                ->where('id_user', $userId)
-                ->first();
-
+            $anakTerpilih = $semuaAnak->first(function ($item) use ($request) {
+                return (string) $item->id === (string) $request->anak;
+            });
         } else {
-
-            $anak = $anakList->first();
-
+            $anakTerpilih = $anakList->first();
         }
 
         /*
         |--------------------------------------------------------------------------
-        | Tidak ada anak
+        | Tidak ada data anak
         |--------------------------------------------------------------------------
         */
 
-        if (!$anak) {
-
+        if (!$anakTerpilih) {
             return view('dashboardpemantauan', [
                 'anak' => null,
                 'anakList' => $anakList,
                 'terakhir' => null,
+                'riwayat' => collect(),
             ]);
-
         }
 
         /*
         |--------------------------------------------------------------------------
-        | Ambil hasil kalkulator anak
+        | Gabungkan semua record dengan nama yang sama
         |--------------------------------------------------------------------------
+        |
+        | Penggabungan dibatasi berdasarkan ID pengguna agar pemeriksaan
+        | milik pengguna lain tidak ikut masuk.
+        |
         */
 
-        $terakhir = $anak->hasilKalkulator;
+        $namaAnak = trim($anakTerpilih->nama_anak);
+
+        $idAnak = $semuaAnak
+            ->filter(function ($item) use ($namaAnak) {
+                return mb_strtolower(trim($item->nama_anak))
+                    === mb_strtolower($namaAnak);
+            })
+            ->pluck('id');
 
         /*
         |--------------------------------------------------------------------------
-        | Dashboard
+        | Ambil seluruh pemeriksaan
+        |--------------------------------------------------------------------------
+        */
+
+        $riwayat = HasilKalkulator::with('dataAnak')
+            ->whereIn('id_anak', $idAnak)
+            ->orderByDesc('created_at')
+            ->orderByDesc('id')
+            ->get();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Pemeriksaan terbaru
+        |--------------------------------------------------------------------------
+        */
+
+        $terakhir = $riwayat->first();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Data identitas dan antropometri terbaru
+        |--------------------------------------------------------------------------
+        |
+        | Record terbaru dipakai untuk menampilkan umur, berat, dan tinggi.
+        |
+        */
+
+        $anak = $semuaAnak
+            ->first(function ($item) use ($namaAnak) {
+                return mb_strtolower(trim($item->nama_anak))
+                    === mb_strtolower($namaAnak);
+            });
+
+        /*
+        |--------------------------------------------------------------------------
+        | Kirim data ke Blade
         |--------------------------------------------------------------------------
         */
 
@@ -77,12 +143,12 @@ class PemantauanController extends Controller
             'anak' => $anak,
             'anakList' => $anakList,
             'terakhir' => $terakhir,
+            'riwayat' => $riwayat,
         ]);
     }
 
-
     /**
-     * Grafik Perkembangan Gizi
+     * Grafik Perkembangan Gizi.
      */
     public function grafik(Request $request)
     {
@@ -90,123 +156,114 @@ class PemantauanController extends Controller
 
         /*
         |--------------------------------------------------------------------------
-        | Anak yang dipilih
+        | Ambil seluruh data anak milik pengguna
+        |--------------------------------------------------------------------------
+        */
+
+        $semuaAnak = DataAnak::where('id_user', $userId)
+            ->orderByDesc('created_at')
+            ->orderByDesc('id')
+            ->get();
+
+        $anakList = $semuaAnak
+            ->unique(function ($item) {
+                return mb_strtolower(trim($item->nama_anak));
+            })
+            ->values();
+
+        /*
+        |--------------------------------------------------------------------------
+        | Tentukan anak yang dipilih
         |--------------------------------------------------------------------------
         */
 
         if ($request->filled('anak')) {
-
-            $anak = DataAnak::where('id', $request->anak)
-                ->where('id_user', $userId)
-                ->first();
-
+            $anak = $semuaAnak->first(function ($item) use ($request) {
+                return (string) $item->id === (string) $request->anak;
+            });
         } else {
-
-            $anak = DataAnak::where('id_user', $userId)
-                ->latest()
-                ->first();
-
+            $anak = $anakList->first();
         }
 
         /*
         |--------------------------------------------------------------------------
-        | Jika tidak ada anak
+        | Jika belum ada data anak
         |--------------------------------------------------------------------------
         */
 
         if (!$anak) {
-
             return redirect()
                 ->route('pemantauan')
                 ->with('error', 'Belum ada data anak.');
-
         }
 
         /*
         |--------------------------------------------------------------------------
-        | Ambil riwayat
+        | Ambil seluruh record anak dengan nama yang sama
         |--------------------------------------------------------------------------
-        |
-        | Karena setiap pemeriksaan saat ini membuat record baru
-        | pada data_anak, kita mengambil data anak berdasarkan
-        | nama anak yang sama.
-        |
         */
 
-        $riwayatAnak = DataAnak::where('id_user', $userId)
-            ->where('nama_anak', $anak->nama_anak)
-            ->with('hasilKalkulator')
-            ->orderBy('created_at', 'asc')
+        $namaAnak = trim($anak->nama_anak);
+
+        $idAnak = $semuaAnak
+            ->filter(function ($item) use ($namaAnak) {
+                return mb_strtolower(trim($item->nama_anak))
+                    === mb_strtolower($namaAnak);
+            })
+            ->pluck('id');
+
+        /*
+        |--------------------------------------------------------------------------
+        | Ambil seluruh hasil pemeriksaan berdasarkan urutan waktu
+        |--------------------------------------------------------------------------
+        */
+
+        $riwayat = HasilKalkulator::with('dataAnak')
+            ->whereIn('id_anak', $idAnak)
+            ->orderBy('created_at')
+            ->orderBy('id')
             ->get();
 
-
         /*
         |--------------------------------------------------------------------------
-        | Bentuk data untuk grafik
+        | Bentuk data grafik
         |--------------------------------------------------------------------------
         */
 
-        $grafikData = $riwayatAnak
-            ->filter(function ($item) {
+        $grafikData = $riwayat
+            ->map(function ($hasil) {
+                $dataAnak = $hasil->dataAnak;
 
-                return $item->hasilKalkulator !== null;
-
-            })
-            ->map(function ($item) {
+                if (!$dataAnak) {
+                    return null;
+                }
 
                 return [
-
-                    'tanggal' => $item->created_at
-                        ->format('d M Y'),
-
-                    'berat' => (float) $item->berat_badan,
-
-                    'tinggi' => (float) $item->tinggi_badan,
-
-                    'umur' => (int) $item->umur_bulan,
-
-                    'status' => $item->hasilKalkulator
-                        ->hasil_prediksi,
-
+                    'tanggal' => $hasil->created_at->format('d M Y'),
+                    'berat' => (float) $dataAnak->berat_badan,
+                    'tinggi' => (float) $dataAnak->tinggi_badan,
+                    'umur' => (int) $dataAnak->umur_bulan,
+                    'status' => $hasil->hasil_prediksi,
                 ];
-
             })
+            ->filter()
             ->values();
 
-
         /*
         |--------------------------------------------------------------------------
-        | Riwayat hasil kalkulator
+        | Kirim data ke Blade grafik
         |--------------------------------------------------------------------------
-        */
-
-        $riwayat = $riwayatAnak
-            ->filter(function ($item) {
-
-                return $item->hasilKalkulator !== null;
-
-            })
-            ->map(function ($item) {
-
-                return $item->hasilKalkulator;
-
-            });
-
-
-        /*
-        |--------------------------------------------------------------------------
-        | Kirim ke Blade
-        |--------------------------------------------------------------------------
+        |
+        | Nama view dan format data utama dipertahankan agar sesuai
+        | dengan implementasi grafik yang sudah ada.
+        |
         */
 
         return view('grafik-perkembangan-gizi', [
-
             'anak' => $anak,
-
+            'anakList' => $anakList,
             'riwayat' => $riwayat,
-
             'grafikData' => $grafikData,
-
         ]);
     }
 }

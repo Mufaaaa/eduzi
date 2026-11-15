@@ -32,15 +32,27 @@
                 textInput='{"placeholder":{"text":"Tanya apa aja di sini..."}}'
                 introMessage='{"text":"Selamat datang di asisten Eduzi 👋"}'
                 avatars='{
-                  "ai": { "src": "{{ asset('images/Logo.png') }}", "shape": "circle", "size": "30px" },
-                  "user": { "color": "#facc15", "shape": "circle", "size": "30px" }
+                    "ai": {
+                        "src": "{{ asset('images/EDUZI NEW LOGO.png') }}",
+                        "shape": "circle",
+                        "size": "30px"
+                    },
+                    "user": {
+                        "color": "#facc15",
+                        "shape": "circle",
+                        "size": "30px"
+                    }
                 }'
                 connect='{
-                  "url": "/deep-chat",
-                  "method": "POST",
-                  "headers": { "X-Requested-With": "XMLHttpRequest" }
+                    "url": "/deep-chat",
+                    "method": "POST",
+                    "headers": {
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    }
                 }'
-            ></deep-chat>
+            >
+            </deep-chat>
         </div>
     </details>
 
